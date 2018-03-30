@@ -1,7 +1,7 @@
 # ERC721SmartToken
 ## ERC721 token with ERC20 adapter
 
-ERC721SmartToken contract implements non-fungible tokens based on [ERC721](https://github.com/ethereum/eips/issues/721) standard 
+```ERC721SmartToken``` contract implements non-fungible tokens based on [ERC721](https://github.com/ethereum/eips/issues/721) standard 
 that also supports [ERC20](https://github.com/ethereum/eips/issues/20) interface. The main idea is to create a token that can be both non-fungible and has transferable value. 
 
 Inside ERC721 contract each not fungible token represented as a NFT structure where there is a member element called ```value ```.
@@ -16,7 +16,7 @@ struct NFT {
 ```
 This element holds ERC20 token inside ERC721 token. 
 
-To work with ERC721 token as normal ERC20 token we need to create a ERC20Adapter that implements standard ERC20 methods, 
+To work with ERC721 token as normal ERC20 token we need to create a ```ERC20Adapter``` that implements standard ERC20 methods, 
 as for example balanceOf method.
 ```solidity
 function balanceOf(address _owner) public view returns (uint256)
@@ -26,6 +26,11 @@ non-fungible tokens belong to this particular address. To select particular toke
 transfer token value to another address we need to implement new methods that will accept address and token ID as parameters.
 ```solidity
 function approveFrom(uint256 _fromId, address _spender, uint256 _toId, uint256 _value) public returns (bool success)
+```
+This method calls ```ERC20Controller``` method implemented by ```ERC721SmartToken``` contract that will use the following mappings to store information abount NFT tokens:
+```solidity
+mapping (address => mapping (address => uint256)) public allowanceIds; // transfer allowance
+mapping (address => mapping (address => uint256)) public allowanceAmt; // transfer allowance
 ```
 
 
