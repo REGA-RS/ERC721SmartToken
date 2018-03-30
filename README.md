@@ -4,7 +4,7 @@
 ERC721SmartToken contract implements non-fungible tokens based on [ERC721](https://github.com/ethereum/eips/issues/721) standard 
 that also supports [ERC20](https://github.com/ethereum/eips/issues/20) interface. The main idea is to create a token that can be both non-fungible and has transferable value. 
 
-Inside ERC721 contract each not fungible token represented as a NFT structure where there is a member element called ‘value’.
+Inside ERC721 contract each not fungible token represented as a NFT structure where there is a member element called ```value ```.
 ```solidity
 struct NFT {
         uint256 value;          // NFT value 
