@@ -24,5 +24,8 @@ function balanceOf(address _owner) public view returns (uint256)
 But in our case due to ERC721 structure for each ```_owner``` there can be many 
 non-fungible tokens belong to this particular address. To select particular token for ERC20 compatible operations like 
 transfer token value to another address we need to implement new methods that will accept address and token ID as parameters.
+```solidity
+function approveFrom(uint256 _fromId, address _spender, uint256 _toId, uint256 _value) public returns (bool success)
+```
 
 
