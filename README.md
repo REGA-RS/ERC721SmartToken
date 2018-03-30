@@ -1,8 +1,8 @@
 # ERC721SmartToken
-ERC721 token with ERC20 adapter
+## ERC721 token with ERC20 adapter
 
-ERC721SmartToken contract implements non-fungible tokens based on ERC721 standard 
-that also supports ERC20 interface. The main idea is to create a token that can be both non-fungible and has transferable value. 
+ERC721SmartToken contract implements non-fungible tokens based on [ERC721](https://github.com/ethereum/eips/issues/721) standard 
+that also supports [ERC20](https://github.com/ethereum/eips/issues/20) interface. The main idea is to create a token that can be both non-fungible and has transferable value. 
 
 Inside ERC721 contract each not fungible token represented as a structure where there is a member element called ‘value’. 
 This element holds ERC20 token inside ERC721 token. 
