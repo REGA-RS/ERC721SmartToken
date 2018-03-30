@@ -33,6 +33,7 @@ mapping (address => mapping (address => uint256)) public allowanceIds; // transf
 mapping (address => mapping (address => uint256)) public allowanceAmt; // transfer allowance
 ```
 Now we can use ERC20 standard methods ```transfer``` and ```transferFrom``` to transfer values between two NFT tokens.
+
 ```ERC20Controller``` implements ```defaultId``` methods that provides a default NFT id for the ```_owner``` address.
 ```solidity
 function defaultId(address _owner) internal returns (uint256 id);
