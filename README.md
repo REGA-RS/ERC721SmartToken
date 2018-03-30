@@ -17,7 +17,7 @@ struct NFT {
 This element holds ERC20 token inside ERC721 token. 
 
 To work with ERC721 token as normal ERC20 token we need to create a ```ERC20Adapter``` that implements standard ERC20 methods, 
-as for example balanceOf method.
+as for example ```balanceOf``` method.
 ```solidity
 function balanceOf(address _owner) public view returns (uint256)
 ```
@@ -32,5 +32,10 @@ This method calls ```ERC20Controller``` method implemented by ```ERC721SmartToke
 mapping (address => mapping (address => uint256)) public allowanceIds; // transfer allowance
 mapping (address => mapping (address => uint256)) public allowanceAmt; // transfer allowance
 ```
-
+Now we can use ERC20 standard methods ```transfer``` and ```transferFrom``` to transfer values between two NFT tokens.
+```ERC20Controller``` implements ```defaultId``` methods that provides a default NFT id for the ```_owner``` address.
+```solidity
+function defaultId(address _owner) internal returns (uint256 id);
+```
+So, we can use ERC20 standard method ```approve``` to approve transfer between two NFT default tokens for ```msg.sender``` and ```_spender```.
 
