@@ -13,7 +13,7 @@
 
 # ERC721SmartToken
 
-### ERC721SmartToken
+### ERC721SmartToken contract implements non-fungible tokens based on ERC721 standard that also supports ERC20 interface.
 
 
 
@@ -245,14 +245,14 @@ empty list
 
 #### cBalanceOf
 
-
+return balance for specific address. Note that for each address there are numner of NFT tokens
 
 
 ##### Inputs
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|_owner|address|||
+|0|_owner|address||The owner address|
 
 
 #### cDestroy
@@ -285,7 +285,7 @@ empty list
 
 #### cTotalSupply
 
-
+ERC20Controller methods
 
 
 ##### Inputs

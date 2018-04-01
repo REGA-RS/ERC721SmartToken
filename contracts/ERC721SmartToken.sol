@@ -32,19 +32,14 @@ import './interfaces/IERC20.sol';
 import './ERC20Controller.sol';
 import './Owned.sol';
 
-/**
-@dev ERC721SmartToken contract implements non-fungible tokens based on ERC721 standard that also supports ERC20 interface.
-*/ 
+
+/// @dev ERC721SmartToken contract implements non-fungible tokens based on ERC721 standard that also supports ERC20 interface.
+
 
 contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
-    
-    /**
-    @dev ERC20Controller methods
-    */
+    /// @dev ERC20Controller methods
 
-    /**
-    @dev cTotalSupply return total supply of issued tokens
-    */
+    /// @return total supply
     function cTotalSupply() public view returns (uint256) {
         uint256 balance = uint256(0);
         uint256 count = nfts.length;
@@ -55,12 +50,10 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
         return balance;
     }
 
-    /**    
-    @dev cBalanceOf return balance for specific address
-    @dev for each address there are numner of NFT tokens
-    @dev belonging to this address
-    @param _owner owner address
-    */
+      
+    /// @dev return balance for specific address. Note that for each address there are numner of NFT tokens
+    /// @param _owner The owner address
+    /// @return total balance for all NFT tokens
     function cBalanceOf(address _owner) public view returns (uint256) {
         uint256[] memory tokenIds = _tokensOfOwner(_owner);
         uint256 balance = uint256(0);
@@ -74,14 +67,13 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
 
     // ERC20Controller helpers
 
-    /**   
-    @dev transfer NFS token value from one (address, id) pair to another one 
-    @param _from    address to transfer value from
-    @param _fromId  non-fungible token ID to transfer value from, must belong to address _from
-    @param _to      address to transfer value to
-    @param _toId    non-fungible token ID to transfer value to, must belong to address _to
-    @param _value   value to transfer
-    */
+ 
+    /// @dev transfer NFS token value from one (address, id) pair to another one 
+    /// @param _from    address to transfer value from
+    /// @param _fromId  non-fungible token ID to transfer value from, must belong to address _from
+    /// @param _to      address to transfer value to
+    /// @param _toId    non-fungible token ID to transfer value to, must belong to address _to
+    /// @param _value   value to transfer
     function transfer(address _from, uint256 _fromId, address _to, uint256 _toId, uint256 _value) internal {
         require(_owns(_from, _fromId));
         require(_owns(_to, _toId));
