@@ -13,7 +13,7 @@
 
 # ERC721SmartToken
 
-### ERC721SmartToken contract implements non-fungible tokens based on ERC721 standard that also supports ERC20 interface.
+### All function calls are currently implement without side effects
 
 
 
@@ -245,14 +245,14 @@ empty list
 
 #### cBalanceOf
 
-return balance for specific address. Note that for each address there are numner of NFT tokens
+return balance for specific address. Note that for each address there are numner of NFT tokens.
 
 
 ##### Inputs
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|_owner|address||The owner address|
+|0|_owner|address||owner address|
 
 
 #### cDestroy
@@ -285,7 +285,7 @@ return balance for specific address. Note that for each address there are numner
 
 #### cTotalSupply
 
-ERC20Controller methods
+return total supply of issued tokens
 
 
 ##### Inputs
@@ -322,28 +322,28 @@ empty list
 
 #### getLevel
 
-
+return current level for NFT token
 
 
 ##### Inputs
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|_to|address|||
-|1|_toId|uint256|||
+|0|_to|address||NFT token owner address|
+|1|_toId|uint256||NFT token ID that|
 
 
 #### increaseLevel
 
-
+increase level for NFT token for one
 
 
 ##### Inputs
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|_to|address|||
-|1|_toId|uint256|||
+|0|_to|address||NFT token owner address|
+|1|_toId|uint256||NFT token ID that|
 
 
 #### name
@@ -380,16 +380,16 @@ empty list
 
 #### setLevel
 
-
+set level for NFT token
 
 
 ##### Inputs
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|_to|address|||
-|1|_toId|uint256|||
-|2|_level|uint256|||
+|0|_to|address||NFT token owner address|
+|1|_toId|uint256||NFT token ID that|
+|2|_level|uint256||level to set|
 
 
 #### supportsInterface
