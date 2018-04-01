@@ -50,7 +50,7 @@
       "absolutePath": "/Users/sergei/ERC721SmartToken/contracts/interfaces/IOwned.sol",
       "exportedSymbols": {
         "IOwned": [
-          2798
+          1981
         ]
       }
     },
@@ -64,9 +64,9 @@
             ".18"
           ]
         },
-        "id": 2783,
+        "id": 1966,
         "name": "PragmaDirective",
-        "src": "0:24:14"
+        "src": "0:24:8"
       },
       {
         "attributes": {
@@ -80,10 +80,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            2798
+            1981
           ],
           "name": "IOwned",
-          "scope": 2799
+          "scope": 1982
         },
         "children": [
           {
@@ -96,7 +96,7 @@
               ],
               "name": "owner",
               "payable": false,
-              "scope": 2798,
+              "scope": 1981,
               "stateMutability": "pure",
               "superFunction": null,
               "visibility": "public"
@@ -109,9 +109,9 @@
                   ]
                 },
                 "children": [],
-                "id": 2784,
+                "id": 1967,
                 "name": "ParameterList",
-                "src": "211:2:14"
+                "src": "211:2:8"
               },
               {
                 "children": [
@@ -119,7 +119,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 2789,
+                      "scope": 1972,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -132,19 +132,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 2785,
+                        "id": 1968,
                         "name": "ElementaryTypeName",
-                        "src": "235:7:14"
+                        "src": "235:7:8"
                       }
                     ],
-                    "id": 2786,
+                    "id": 1969,
                     "name": "VariableDeclaration",
-                    "src": "235:7:14"
+                    "src": "235:7:8"
                   }
                 ],
-                "id": 2787,
+                "id": 1970,
                 "name": "ParameterList",
-                "src": "234:9:14"
+                "src": "234:9:8"
               },
               {
                 "attributes": {
@@ -153,14 +153,14 @@
                   ]
                 },
                 "children": [],
-                "id": 2788,
+                "id": 1971,
                 "name": "Block",
-                "src": "244:2:14"
+                "src": "244:2:8"
               }
             ],
-            "id": 2789,
+            "id": 1972,
             "name": "FunctionDefinition",
-            "src": "197:49:14"
+            "src": "197:49:8"
           },
           {
             "attributes": {
@@ -173,7 +173,7 @@
               ],
               "name": "transferOwnership",
               "payable": false,
-              "scope": 2798,
+              "scope": 1981,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -185,7 +185,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_newOwner",
-                      "scope": 2794,
+                      "scope": 1977,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -198,19 +198,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 2790,
+                        "id": 1973,
                         "name": "ElementaryTypeName",
-                        "src": "279:7:14"
+                        "src": "279:7:8"
                       }
                     ],
-                    "id": 2791,
+                    "id": 1974,
                     "name": "VariableDeclaration",
-                    "src": "279:17:14"
+                    "src": "279:17:8"
                   }
                 ],
-                "id": 2792,
+                "id": 1975,
                 "name": "ParameterList",
-                "src": "278:19:14"
+                "src": "278:19:8"
               },
               {
                 "attributes": {
@@ -219,14 +219,14 @@
                   ]
                 },
                 "children": [],
-                "id": 2793,
+                "id": 1976,
                 "name": "ParameterList",
-                "src": "304:0:14"
+                "src": "304:0:8"
               }
             ],
-            "id": 2794,
+            "id": 1977,
             "name": "FunctionDefinition",
-            "src": "252:53:14"
+            "src": "252:53:8"
           },
           {
             "attributes": {
@@ -239,7 +239,7 @@
               ],
               "name": "acceptOwnership",
               "payable": false,
-              "scope": 2798,
+              "scope": 1981,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -252,9 +252,9 @@
                   ]
                 },
                 "children": [],
-                "id": 2795,
+                "id": 1978,
                 "name": "ParameterList",
-                "src": "334:2:14"
+                "src": "334:2:8"
               },
               {
                 "attributes": {
@@ -263,24 +263,24 @@
                   ]
                 },
                 "children": [],
-                "id": 2796,
+                "id": 1979,
                 "name": "ParameterList",
-                "src": "343:0:14"
+                "src": "343:0:8"
               }
             ],
-            "id": 2797,
+            "id": 1980,
             "name": "FunctionDefinition",
-            "src": "310:34:14"
+            "src": "310:34:8"
           }
         ],
-        "id": 2798,
+        "id": 1981,
         "name": "ContractDefinition",
-        "src": "61:285:14"
+        "src": "61:285:8"
       }
     ],
-    "id": 2799,
+    "id": 1982,
     "name": "SourceUnit",
-    "src": "0:346:14"
+    "src": "0:346:8"
   },
   "compiler": {
     "name": "solc",
@@ -288,5 +288,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-03-28T11:00:21.524Z"
+  "updatedAt": "2018-04-01T05:39:22.245Z"
 }
