@@ -228,7 +228,7 @@
       "absolutePath": "/Users/sergei/ERC721SmartToken/contracts/interfaces/IERC20.sol",
       "exportedSymbols": {
         "IERC20": [
-          2006
+          2110
         ]
       }
     },
@@ -242,39 +242,39 @@
             ".18"
           ]
         },
-        "id": 1986,
+        "id": 2090,
         "name": "PragmaDirective",
         "src": "0:24:5"
       },
       {
         "attributes": {
-          "SourceUnit": 2171,
+          "SourceUnit": 2275,
           "absolutePath": "/Users/sergei/ERC721SmartToken/contracts/interfaces/IERC20Token.sol",
           "file": "./IERC20Token.sol",
-          "scope": 2007,
+          "scope": 2111,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 1987,
+        "id": 2091,
         "name": "ImportDirective",
         "src": "26:27:5"
       },
       {
         "attributes": {
           "contractDependencies": [
-            2170
+            2274
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            2006,
-            2170
+            2110,
+            2274
           ],
           "name": "IERC20",
-          "scope": 2007
+          "scope": 2111
         },
         "children": [
           {
@@ -288,15 +288,15 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "IERC20Token",
-                  "referencedDeclaration": 2170,
+                  "referencedDeclaration": 2274,
                   "type": "contract IERC20Token"
                 },
-                "id": 1988,
+                "id": 2092,
                 "name": "UserDefinedTypeName",
                 "src": "114:11:5"
               }
             ],
-            "id": 1989,
+            "id": 2093,
             "name": "InheritanceSpecifier",
             "src": "114:11:5"
           },
@@ -313,7 +313,7 @@
                       "constant": false,
                       "indexed": true,
                       "name": "_from",
-                      "scope": 1997,
+                      "scope": 2101,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -326,12 +326,12 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 1990,
+                        "id": 2094,
                         "name": "ElementaryTypeName",
                         "src": "147:7:5"
                       }
                     ],
-                    "id": 1991,
+                    "id": 2095,
                     "name": "VariableDeclaration",
                     "src": "147:21:5"
                   },
@@ -340,7 +340,7 @@
                       "constant": false,
                       "indexed": true,
                       "name": "_to",
-                      "scope": 1997,
+                      "scope": 2101,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -353,12 +353,12 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 1992,
+                        "id": 2096,
                         "name": "ElementaryTypeName",
                         "src": "170:7:5"
                       }
                     ],
-                    "id": 1993,
+                    "id": 2097,
                     "name": "VariableDeclaration",
                     "src": "170:19:5"
                   },
@@ -367,7 +367,7 @@
                       "constant": false,
                       "indexed": false,
                       "name": "_value",
-                      "scope": 1997,
+                      "scope": 2101,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -380,22 +380,22 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 1994,
+                        "id": 2098,
                         "name": "ElementaryTypeName",
                         "src": "191:7:5"
                       }
                     ],
-                    "id": 1995,
+                    "id": 2099,
                     "name": "VariableDeclaration",
                     "src": "191:14:5"
                   }
                 ],
-                "id": 1996,
+                "id": 2100,
                 "name": "ParameterList",
                 "src": "146:60:5"
               }
             ],
-            "id": 1997,
+            "id": 2101,
             "name": "EventDefinition",
             "src": "132:75:5"
           },
@@ -412,7 +412,7 @@
                       "constant": false,
                       "indexed": true,
                       "name": "_owner",
-                      "scope": 2005,
+                      "scope": 2109,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -425,12 +425,12 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 1998,
+                        "id": 2102,
                         "name": "ElementaryTypeName",
                         "src": "227:7:5"
                       }
                     ],
-                    "id": 1999,
+                    "id": 2103,
                     "name": "VariableDeclaration",
                     "src": "227:22:5"
                   },
@@ -439,7 +439,7 @@
                       "constant": false,
                       "indexed": true,
                       "name": "_spender",
-                      "scope": 2005,
+                      "scope": 2109,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -452,12 +452,12 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 2000,
+                        "id": 2104,
                         "name": "ElementaryTypeName",
                         "src": "251:7:5"
                       }
                     ],
-                    "id": 2001,
+                    "id": 2105,
                     "name": "VariableDeclaration",
                     "src": "251:24:5"
                   },
@@ -466,7 +466,7 @@
                       "constant": false,
                       "indexed": false,
                       "name": "_value",
-                      "scope": 2005,
+                      "scope": 2109,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -479,32 +479,32 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 2002,
+                        "id": 2106,
                         "name": "ElementaryTypeName",
                         "src": "277:7:5"
                       }
                     ],
-                    "id": 2003,
+                    "id": 2107,
                     "name": "VariableDeclaration",
                     "src": "277:14:5"
                   }
                 ],
-                "id": 2004,
+                "id": 2108,
                 "name": "ParameterList",
                 "src": "226:66:5"
               }
             ],
-            "id": 2005,
+            "id": 2109,
             "name": "EventDefinition",
             "src": "212:81:5"
           }
         ],
-        "id": 2006,
+        "id": 2110,
         "name": "ContractDefinition",
         "src": "95:200:5"
       }
     ],
-    "id": 2007,
+    "id": 2111,
     "name": "SourceUnit",
     "src": "0:295:5"
   },
@@ -514,5 +514,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-04-03T11:41:19.188Z"
+  "updatedAt": "2018-04-03T13:51:11.153Z"
 }

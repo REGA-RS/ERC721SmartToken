@@ -37,6 +37,32 @@ import './Owned.sol';
 
 /// @dev All function calls are currently implement without side effects
 contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
+    /// ERC721SmartToken Transfer event
+    /// @param from NFT token owner address 
+    /// @param fromId NFT token ID for transfer
+    /// @param to token owner to recieve the value
+    /// @param toId NFT token ID to recieve the value
+    /// @param value transfered value
+    event Transfer(address from, uint256 fromId, address to, uint256 toId, uint256 value);
+    /// ERC721SmartToken AddValue event
+    /// @param to token owner to recieve the value
+    /// @param toId NFT token ID to recieve the value
+    /// @param value transfered value
+    event AddValue(address to, uint256 toId, uint256 value);
+    /// ERC721SmartToken RemoveValue event
+    /// @param from NFT token owner address
+    /// @param fromId NFT token ID to decrease the value
+    /// @param value value to decrease
+    event RemoveValue(address from, uint256 fromId, uint256 value);
+    /// ERC721SmartToken SetLevel event
+    /// @param to NFT token owner address
+    /// @param toId NFT token ID to set level
+    /// @param level new token level
+    event SetLevel(address to, uint256 toId, uint256 level);
+    /// ERC721SmartToken IncreaseLevel event
+    /// @param to NFT token owner address
+    /// @param toId NFT token ID to increase level
+    event IncreaseLevel(address to, uint256 toId);
     /// ERC20Controller method
     /// @dev return total supply of issued tokens
     /// @return total supply
@@ -79,6 +105,8 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
 
         nfts[_fromId].value = nfts[_fromId].value - _value;
         nfts[_toId].value = nfts[_toId].value + _value;
+
+        Transfer(_from, _fromId, _to, _toId, _value);
     }
     /// ERC20Controller helper
     /// @dev return default NFT token ID for specific address
@@ -101,6 +129,8 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
         require(_owns(_to, _toId));
         require(_value != uint256(0));
         nfts[_toId].value = nfts[_toId].value + _value;
+
+        AddValue(_to, _toId, _value);
     }
     /// ERC20Controller helper
     /// @dev decrease NFT token value
@@ -112,6 +142,8 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
         require(_value != uint256(0));
         require(nfts[_fromId].value >= _value);
         nfts[_fromId].value = nfts[_fromId].value - _value;
+
+        RemoveValue(_from, _fromId, _value);
     }
     /// ERC20Controller helper
     /// @dev set level for NFT token
@@ -121,6 +153,8 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
     function setLevel(address _to, uint256 _toId, uint256 _level) ownerOnly public {
         require(_owns(_to, _toId));
         nfts[_toId].level = _level;
+
+        SetLevel(_to, _toId, _level);
     }
     /// ERC20Controller helper
     /// @dev increase level for NFT token for one 
@@ -129,6 +163,8 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
     function increaseLevel(address _to, uint256 _toId) ownerOnly public {
         require(_owns(_to, _toId));
         nfts[_toId].level = nfts[_toId].level + 1;
+
+        IncreaseLevel(_to, _toId);
     }
     /// ERC20Controller helper
     /// @dev return current level for NFT token

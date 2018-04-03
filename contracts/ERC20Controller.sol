@@ -30,6 +30,34 @@ import './interfaces/IERC20Controller.sol';
 
 /// ERC20 Controller  
 contract ERC20Controller is IERC20Controller {
+    /// ERC20Controller CApproveFrom event
+    /// @param fromId NFT token ID to transfer value from
+    /// @param spender NFT token owner for fromId 
+    /// @param toId NFT token ID to transfer value to
+    /// @param value approved value
+    event CApproveFrom(uint256 fromId, address spender, uint256 toId, uint256 value);
+    /// ERC20Controller CApprove event
+    /// @param spender NFT token owner to recieve value
+    /// @param value approved value
+    event CApprove(address spender, uint256 value);
+    /// ERC20Controller CTransferFrom event
+    /// @param from NFT token owner address
+    /// @param fromId NFT token ID to transfer value from 
+    /// @param to NFT token owner address to recieve the value
+    /// @param toId NFT token ID to recieve the value
+    /// @param value transfered value
+    /// @param allowance remaining allowance amount
+    event CTransferFrom(address from, uint256 fromId, address to, uint256 toId, uint256 value, uint256 allowance);
+    /// ERC20Controller CIssue event
+    /// @param to NFT token owner address
+    /// @param toId NFT token ID to recieve amount
+    /// @param amount issued amount
+    event CIssue(address to, uint256 toId, uint256 amount);
+    /// ERC20Controller CDestroy event
+    /// @param from NFT token owner address
+    /// @param fromId NFT token ID to decrease value
+    /// @param amount decreased value amount
+    event CDestroy(address from, uint256 fromId, uint256 amount);
     /// @dev transfer allowance fot IDs
     /// from given address
     mapping (address => mapping (address => uint256)) public allowanceIds; // transfer allowance
@@ -59,6 +87,8 @@ contract ERC20Controller is IERC20Controller {
         allowanceIds[_sender][_sender] = _fromId;
         allowanceAmt[_sender][_spender] = _value;
 
+        CApproveFrom(_fromId, _spender, _toId, _value);
+
         return true;
     }
     /// approve NFT token value transfer for default token ID
@@ -78,6 +108,8 @@ contract ERC20Controller is IERC20Controller {
         allowanceIds[_sender][_spender] = _toId;
         allowanceIds[_sender][_sender] = _fromId;
         allowanceAmt[_sender][_spender] = _value;
+
+        CApprove(_spender, _value);
 
         return true;
     }
@@ -117,6 +149,9 @@ contract ERC20Controller is IERC20Controller {
             delete allowanceIds[_sender][_sender];
             delete allowanceIds[_sender][_to];
         }
+
+        CTransferFrom(_from, _fromId, _to, _toId, _value, allowanceAmt[_sender][_to]);
+
         return true;
     }
     /// transfer value from NFT token that belongs to sender to another one. The transfer must be approved before 
@@ -143,6 +178,8 @@ contract ERC20Controller is IERC20Controller {
         }
         require(id != uint256(0));
         addValue(_to, id, _amount);
+
+        CIssue(_to, _toId, _amount);
     }
     /// decrease value for NFT token
     /// @param _from address of token owner
@@ -157,5 +194,7 @@ contract ERC20Controller is IERC20Controller {
         }
         require(id != uint256(0));
         removeValue(_from, id, _amount);
+
+        CDestroy(_from, _fromId, _amount);
     }
 }

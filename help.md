@@ -495,16 +495,18 @@ ERC721 Public
 
 #### Transfer
 
-transfer event
-ERC721 events
+ERC721SmartToken Transfer event
+
 
 ##### Params
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|from|address||address transfer from|
-|1|to|address||address transfer to|
-|2|tokenId|uint256||NFT token ID to transfer|
+|0|from|address||NFT token owner address|
+|1|fromId|uint256||NFT token ID for transfer|
+|2|to|address||token owner to recieve the value|
+|3|toId|uint256||NFT token ID to recieve the value|
+|4|value|uint256||transfered value|
 
 
 #### Approval
@@ -536,6 +538,79 @@ ERC721 events
 |3|owner|address||NFT token owner|
 
 
+#### CApproveFrom
+
+ERC20Controller CApproveFrom event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|fromId|uint256||NFT token ID to transfer value from|
+|1|spender|address||NFT token owner for fromId|
+|2|toId|uint256||NFT token ID to transfer value to|
+|3|value|uint256||approved value|
+
+
+#### CApprove
+
+ERC20Controller CApprove event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|spender|address||NFT token owner to recieve value|
+|1|value|uint256||approved value|
+
+
+#### CTransferFrom
+
+ERC20Controller CTransferFrom event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|from|address||NFT token owner address|
+|1|fromId|uint256||NFT token ID to transfer value from|
+|2|to|address||NFT token owner address to recieve the value|
+|3|toId|uint256||NFT token ID to recieve the value|
+|4|value|uint256||transfered value|
+|5|allowance|uint256||remaining allowance amount|
+
+
+#### CIssue
+
+ERC20Controller CIssue event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|to|address||NFT token owner address|
+|1|toId|uint256||NFT token ID to recieve amount|
+|2|amount|uint256||issued amount|
+
+
+#### CDestroy
+
+ERC20Controller CDestroy event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|from|address||NFT token owner address|
+|1|fromId|uint256||NFT token ID to decrease value|
+|2|amount|uint256||decreased value amount|
+
+
 #### OwnerUpdate
 
 
@@ -547,6 +622,61 @@ ERC721 events
 |---|-----|----|--------|-----------|
 |0|_prevOwner|address|||
 |1|_newOwner|address|||
+
+
+#### AddValue
+
+ERC721SmartToken AddValue event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|to|address||token owner to recieve the value|
+|1|toId|uint256||NFT token ID to recieve the value|
+|2|value|uint256||transfered value|
+
+
+#### RemoveValue
+
+ERC721SmartToken RemoveValue event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|from|address||NFT token owner address|
+|1|fromId|uint256||NFT token ID to decrease the value|
+|2|value|uint256||value to decrease|
+
+
+#### SetLevel
+
+ERC721SmartToken SetLevel event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|to|address||NFT token owner address|
+|1|toId|uint256||NFT token ID to set level|
+|2|level|uint256||new token level|
+
+
+#### IncreaseLevel
+
+ERC721SmartToken IncreaseLevel event
+
+
+##### Params
+
+|#  |Param|Type|TypeHint|Description|
+|---|-----|----|--------|-----------|
+|0|to|address||NFT token owner address|
+|1|toId|uint256||NFT token ID to increase level|
 
 
 

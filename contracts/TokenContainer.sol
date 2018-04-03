@@ -31,6 +31,15 @@ import './ERC721SmartToken.sol';
 
 /// TokenContainer is ERC721SmartToken that provide hierarchical structure for token pools
 contract TokenContainer is ERC721SmartToken {
+    /// TokenContainer AddToken event
+    /// @param nodeId NFT token ID to be added
+    /// @param parentId NFT token ID for pool token
+    /// @param level new nodeId level
+    event AddToken(uint256 nodeId, uint256 parentId, uint256 level);
+    /// TokenContainer RemoveToken event
+    /// @param nodeId NFT token ID to be removed
+    /// @param level removed token level
+    event RemoveToken(uint256 nodeId, uint256 level);
     /// max number of levels in  hierarchical structure
     uint256 public maxLevel;
     /// from NFT ID to NFT ID of pool token
@@ -43,13 +52,17 @@ contract TokenContainer is ERC721SmartToken {
 
         tokenIndexToPoolToken[_nodeId] = _parentId;
         nfts[_nodeId].level = nfts[_parentId].level + 1;
+
+        AddToken(_nodeId, _parentId, nfts[_nodeId].level);
     }
     function removeToken(uint256 _nodeId) public {
         require(_nodeId != uint256(0) && _nodeId < nfts.length);
         uint256 poolSize = _getPoolSize(_nodeId);
         require(poolSize == uint256(0));
-        
+
         delete tokenIndexToPoolToken[_nodeId];
+
+        RemoveToken(_nodeId, nfts[_nodeId].level);
     }
     function getPath(uint256 _nodeId) external view returns(uint256[] path) {
         uint256 parentId;
