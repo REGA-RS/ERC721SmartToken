@@ -46,3 +46,9 @@ So, we can use ERC20 standard method ```approve``` to approve transfer between t
 mapping (uint256 => uint256) public tokenIndexToPoolToken;
 ```
 The public variable ```maxLevel``` defines the maximum number of levelels in hierarchical structure where the ```root``` must be al level ```0``` and a token with level ```maxLevel-1``` will be terminal node in the structure.
+
+For each token we can find the path from this token to the ```root``` token using the following method:
+```solidity
+function getPath(uint256 _nodeId) external view returns(uint256[] path);
+```
+The ```path``` could contain number of token IDs starting from the first pool token that ```_nodeId``` belongs to. Plase note that NFT ID ```0``` is reserved and equal to ```null``` value. So, only not zeto IDs are counted as pool token IDs.  
