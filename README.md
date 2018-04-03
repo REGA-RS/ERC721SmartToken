@@ -45,3 +45,4 @@ So, we can use ERC20 standard method ```approve``` to approve transfer between t
 ```solidity
 mapping (uint256 => uint256) public tokenIndexToPoolToken;
 ```
+The public variable ```maxLevel``` defines the maximum number of levelels in hierarchical structure where the ```root``` must be al level ```0``` and a token with level ```maxLevel-1``` will be terminal node in the structure.
