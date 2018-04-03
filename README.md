@@ -40,6 +40,8 @@ function defaultId(address _owner) internal returns (uint256 id);
 ```
 So, we can use ERC20 standard method ```approve``` to approve transfer between two NFT default tokens for ```msg.sender``` and ```_spender```.
 
+See [Help](https://github.com/REGA-RS/ERC721SmartToken/blob/master/help.md#events) for events description.
+
 ## TokenContainer 
 ```TokenContainer``` smart contract implements hierarchical structure for token pools. Now one NFT token can be a container for other NFT tokens in the same smart contract. Each token can belong only one container, ```token-container``` relationship supported by the following mapping:
 ```solidity
