@@ -52,8 +52,15 @@ For each token we can find the path from this token to the ```root``` token usin
 function getPath(uint256 _nodeId) external view returns(uint256[] path);
 ```
 The ```path``` could contain number of token IDs starting from the first pool token that ```_nodeId``` belongs to. Plase note that NFT ID ```0``` is reserved and equal to ```null``` value. So, only not zeto IDs are counted as pool token IDs.
+
 For each pool token we can check the pool size and recieve pool members array:
 ```solidity
 function _getPoolSize(uint256 _nodeId) view internal returns(uint256 size);
 function _getPool(uint256 _nodeId) view internal returns(uint256[] pool);
 ```
+A NFT token can be added to pool token or can be removed from pool. In removal we will check if removing token ```nodeId``` does not have any pool members ```_getPoolSize(_nodeId) == 0``` and if not we will rise an exception.
+```solidity
+function addToken(uint256 _nodeId, uint256 _parentId) public;
+function removeToken(uint256 _nodeId) public;
+```
+The ```TokenContainer``` constructur calls ```ERC721SmartToken``` constructur with token ```name``` and token ```symbol```.
