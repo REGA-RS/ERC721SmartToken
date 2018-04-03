@@ -51,4 +51,9 @@ For each token we can find the path from this token to the ```root``` token usin
 ```solidity
 function getPath(uint256 _nodeId) external view returns(uint256[] path);
 ```
-The ```path``` could contain number of token IDs starting from the first pool token that ```_nodeId``` belongs to. Plase note that NFT ID ```0``` is reserved and equal to ```null``` value. So, only not zeto IDs are counted as pool token IDs.  
+The ```path``` could contain number of token IDs starting from the first pool token that ```_nodeId``` belongs to. Plase note that NFT ID ```0``` is reserved and equal to ```null``` value. So, only not zeto IDs are counted as pool token IDs.
+For each pool token we can check the pool size and recieve pool members array:
+```solidity
+function _getPoolSize(uint256 _nodeId) view internal returns(uint256 size);
+function _getPool(uint256 _nodeId) view internal returns(uint256[] pool);
+```
