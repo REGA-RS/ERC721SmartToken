@@ -70,10 +70,10 @@ The ```TokenContainer``` constructur calls ```ERC721SmartToken``` constructur wi
 ## TokenPool
 ```TokenPool``` is TokenContainer with 4 level pool structure:
 ```solidity
-Level   Container / Member
---------------------------------------------
-0       SuperPool
-1           |______Pool
-2                   |______SubPool
-3                             |_______Token
+Level     Container / Member
+----------------------------------------------
+  0       SuperPool
+  1           |______Pool
+  2                   |______SubPool
+  3                             |_______Token
 ```
