@@ -68,7 +68,7 @@ function removeToken(uint256 _nodeId) public;
 The ```TokenContainer``` constructur calls ```ERC721SmartToken``` constructur with token ```name``` and token ```symbol```.
 
 ## TokenPool
-```TokenPool``` is TokenContainer with 4 level pool structure:
+```TokenPool``` is ```TokenContainer``` with 4 level pool structure:
 ```solidity
 Level     Container / Member
 --------------------------------------------
