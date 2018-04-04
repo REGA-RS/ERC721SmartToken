@@ -77,3 +77,11 @@ Level     Container / Member
   2                   |_____.SubPool
   3                             |_____.Token
 ```
+Use ```insertPool``` method to insert token in the pool structure:
+```solidity
+function insertPool(uint256 _id) public returns(bool);
+```
+This function calls ```_insertPool``` to insert the token and if needed also insert new pool in the structure:
+```solidity
+function _insertPool(uint256 _id, uint8 _level) internal returns (bool);
+```
