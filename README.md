@@ -73,7 +73,7 @@ The ```TokenContainer``` constructur calls ```ERC721SmartToken``` constructur wi
 Level     Container / Member
 ----------------------------------------------
   0       SuperPool
-  1           I-----Pool
-  2                   I------SubPool
-  3                             I-------Token
+  1           I_____.Pool
+  2                   I_____.SubPool
+  3                             I_____.Token
 ```
