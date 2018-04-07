@@ -77,6 +77,17 @@ Level     Container / Member
   2                   |_____.SubPool
   3                             |_____.Token
 ```
+The pool schema described by the following structure:
+```solidity
+struct Pool {
+        uint8   level;      // Pool level: 0,1,2,3
+        uint256 maxNumber;  // Maximum number of pools on this lavel
+        uint256 maxMember;  // Maximum number of members for the pool
+        uint256 number;     // Pool number for this level
+        uint256 last;       // NFT ID for last availible pool (with member capacity)
+        uint256 share;      // Pool share from token investment
+ }
+ ```
 Use ```insertPool``` method to insert token in the pool structure:
 ```solidity
 function insertPool(uint256 _id) public returns(bool);
