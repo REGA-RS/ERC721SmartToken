@@ -96,3 +96,23 @@ This function calls ```_insertPool``` to insert the token and if needed also ins
 ```solidity
 function _insertPool(uint256 _id, uint8 _level) internal returns (bool);
 ```
+After the token is inserted in the pool structure the function ```insertPool``` calls the value distribution function:
+```solidity
+function _distributeValue(uint256 _id) internal returns (bool);
+```
+than distrubutes the token value between ```SuperPool```, ```Pool``` and ```SubPool``` based on ```Pool.share```. The rest of the token value after the pool distribution will go to commission. Use the following methods to get collected commission and current pool values:
+```solidity
+function getComission() public view returns(uint256 commission);
+```
+```solidity
+function getDistribution() public view returns(uint256[4] distribution)
+```
+The last function returns the following values:
+```solidity
+distribution[0];         // Super Pool Value
+distribution[1];         // Pool Value
+distribution[2];         // SubPool Value
+distribution[3];         // Tokens Value (must be 0)
+```
+        
+
