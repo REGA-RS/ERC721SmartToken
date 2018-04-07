@@ -118,5 +118,9 @@ To pay value the smart contract uses the following function:
 ```solidity
 function _payValue(uint256 _id, uint256 _value) internal returns(uint256[4] distribution);
 ```
-```__payValue``` returns distribution for the payment based on the same structure as ```getDistribution``` but in this case only one array element can have non zero value equal to ```_value```. For example, if Pool has made a payment then ```distribution[1] == _value``` and the rest of ```distribution[0,2,3] == 0```. If all elements have zero value then payment is not successful and all pool does not have enough  value to pay requested amount. In this case ```_payValue``` emits ```SecondTierCall``` event.
+```__payValue``` returns distribution for the payment based on the same structure as ```getDistribution``` but in this case only one array element can have non zero value equal to ```_value```. For example, if Pool has made a payment then ```distribution[1] == _value``` and the rest of ```distribution[0,2,3] == 0```. If all elements have zero value then payment is not successful and all pool does not have enough  value to pay requested amount. In this case ```_payValue``` emits ```SecondTierCall``` event. If the payment went through then event ```PaymentValue``` was emited:
+```solidity
+ event PaymentValue(uint256 id, uint256 value, uint8 level);
+ ```
+ and it will return the pool level that has made the payment, in our example it will be ```level == 1```.
 
