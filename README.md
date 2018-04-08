@@ -124,3 +124,6 @@ function _payValue(uint256 _id, uint256 _value) internal returns(uint256[4] dist
  ```
  and it will return the pool level that has made the payment, in our example it will be ```level == 1```.
 
+## TokenCrowdsurance
+
+```TokenCrowdsurance``` is ```ERC721SmartToken``` for crowdsurance products. Crowdsurance, meaning people unite in communities to provide a guarantee of compensation for unexpected loss. Using ```ERC721SmartToken``` crowdsurance product can be 'tokenized' and can be availible as ERC20 token.  
