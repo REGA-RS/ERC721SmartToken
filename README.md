@@ -131,5 +131,9 @@ The crowdsurance business process starting from ```scoring``` function that will
 ```solidity
  function scoring(address _member, uint256 _score, uint256 _amount) ownerOnly public;
  ```
- The ```scoring``` can be called only by contract owner.
+The ```scoring``` can be called only by contract owner. After recieve score a new member can join the Crowdsurance smart contract using ```join``` function. 
+```solidity
+function join() public payable returns(uint256 cowdsuranceId);
+```
+This function will return the Crowdsurance NFT token ID.
  
