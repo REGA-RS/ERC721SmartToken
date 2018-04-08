@@ -164,6 +164,7 @@ contract TokenPool is TokenContainer {
         // call internal function
         assert(_insertPool(_id, 2));
         // if inserted then make value distribution 
+        assert(_distributeValue(_id));
         return true;
     }
     /// get collected comission
