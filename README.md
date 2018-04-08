@@ -77,6 +77,17 @@ Level     Container / Member
   2                   |_____.SubPool
   3                             |_____.Token
 ```
+The pool schema described by the following structure:
+```solidity
+struct Pool {
+        uint8   level;      // Pool level: 0,1,2,3
+        uint256 maxNumber;  // Maximum number of pools on this lavel
+        uint256 maxMember;  // Maximum number of members for the pool
+        uint256 number;     // Pool number for this level
+        uint256 last;       // NFT ID for last availible pool (with member capacity)
+        uint256 share;      // Pool share from token investment
+ }
+ ```
 Use ```insertPool``` method to insert token in the pool structure:
 ```solidity
 function insertPool(uint256 _id) public returns(bool);
@@ -85,3 +96,31 @@ This function calls ```_insertPool``` to insert the token and if needed also ins
 ```solidity
 function _insertPool(uint256 _id, uint8 _level) internal returns (bool);
 ```
+After the token is inserted in the pool structure the function ```insertPool``` calls the value distribution function:
+```solidity
+function _distributeValue(uint256 _id) internal returns (bool);
+```
+than distrubutes the token value between ```SuperPool```, ```Pool``` and ```SubPool``` based on ```Pool.share```. The rest of the token value after the pool distribution will go to commission. Use the following methods to get collected commission and current pool values:
+```solidity
+function getComission() public view returns(uint256 commission);
+```
+```solidity
+function getDistribution() public view returns(uint256[4] distribution)
+```
+The last function returns the following values:
+```solidity
+distribution[0];         // Super Pool Value
+distribution[1];         // Pool Value
+distribution[2];         // SubPool Value
+distribution[3];         // Tokens Value (must be 0)
+```
+To pay value the smart contract uses the following function:
+```solidity
+function _payValue(uint256 _id, uint256 _value) internal returns(uint256[4] distribution);
+```
+```__payValue``` returns distribution for the payment based on the same structure as ```getDistribution``` but in this case only one array element can have non zero value equal to ```_value```. For example, if Pool has made a payment then ```distribution[1] == _value``` and the rest of ```distribution[0,2,3] == 0```. If all elements have zero value then payment is not successful and all pool does not have enough  value to pay requested amount. In this case ```_payValue``` emits ```SecondTierCall``` event. If the payment went through then event ```PaymentValue``` was emited:
+```solidity
+ event PaymentValue(uint256 id, uint256 value, uint8 level);
+ ```
+ and it will return the pool level that has made the payment, in our example it will be ```level == 1```.
+
