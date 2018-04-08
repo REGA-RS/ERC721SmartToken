@@ -90,6 +90,9 @@ contract TokenCrowdsurance is TokenPool {
         cowdsuranceId = id;
         // emit event 
         Join(member, id, amount);
+        // clear mapping
+        delete addressToAmount[member];
+        delete addressToScore[member];
     }
     function TokenCrowdsurance(string _name, string _symbol) TokenPool(_name, _symbol) public {}
 }
