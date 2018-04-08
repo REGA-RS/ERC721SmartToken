@@ -135,5 +135,8 @@ The ```scoring``` can be called only by contract owner. After recieve score a ne
 ```solidity
 function join() public payable returns(uint256 cowdsuranceId);
 ```
-This function will return the Crowdsurance NFT token ID.
+This function will return the Crowdsurance NFT token ID. The member can check join amount with the following view method:
+```solidity
+function apply() public view returns(uint256 amount);
+```
  
