@@ -233,9 +233,9 @@ contract TokenPool is TokenContainer {
         maxLevel = 4; // FIXED DO NOT CHANGE!
 
         // Creating templates
-        uint superPoolId = super._createNFT(uint256(0), "SuperPool", uint256(1), owner);
-        uint poolId = super._createNFT(uint256(0), "Pool", uint256(1), owner);
-        uint subPoolId = super._createNFT(uint256(0), "SubPool", uint256(2), owner);
+        uint superPoolId = _createNFT(uint256(0), "SuperPool", uint256(1), owner);
+        uint poolId = _createNFT(uint256(0), "Pool", uint256(1), owner);
+        uint subPoolId = _createNFT(uint256(0), "SubPool", uint256(2), owner);
 
         // Build initil structure SubPool --> Pool --> SuperPool
         addToken(poolId, superPoolId);
