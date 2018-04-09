@@ -107,7 +107,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 2161,
+          "SourceUnit": 4007,
           "absolutePath": "/Users/sergei/ERC721SmartToken/contracts/interfaces/IOwned.sol",
           "file": "./interfaces/IOwned.sol",
           "scope": 1865,
@@ -123,14 +123,14 @@
       {
         "attributes": {
           "contractDependencies": [
-            2160
+            4006
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
             1864,
-            2160
+            4006
           ],
           "name": "Owned",
           "scope": 1865
@@ -147,7 +147,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "IOwned",
-                  "referencedDeclaration": 2160,
+                  "referencedDeclaration": 4006,
                   "type": "contract IOwned"
                 },
                 "id": 1788,
@@ -368,7 +368,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 2172,
+                                  "referencedDeclaration": 4018,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -448,7 +448,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2163,
+                              "referencedDeclaration": 4009,
                               "type": "function (bool) pure",
                               "value": "assert"
                             },
@@ -489,7 +489,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2172,
+                                      "referencedDeclaration": 4018,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -555,7 +555,7 @@
               "payable": false,
               "scope": 1864,
               "stateMutability": "nonpayable",
-              "superFunction": 2156,
+              "superFunction": 4002,
               "visibility": "public"
             },
             "children": [
@@ -659,7 +659,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -798,7 +798,7 @@
               "payable": false,
               "scope": 1864,
               "stateMutability": "nonpayable",
-              "superFunction": 2159,
+              "superFunction": 4005,
               "visibility": "public"
             },
             "children": [
@@ -854,7 +854,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -895,7 +895,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2172,
+                                      "referencedDeclaration": 4018,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -1185,5 +1185,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-04-09T13:37:14.197Z"
+  "updatedAt": "2018-04-09T19:12:07.221Z"
 }

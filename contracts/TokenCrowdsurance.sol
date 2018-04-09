@@ -34,6 +34,7 @@ import './TokenPool.sol';
 contract TokenCrowdsurance is TokenPool {
     /// Crowdsurance token ERC721 extention
     /// @param timeStamp join time stemp
+    /// @param activated coverage activation time stamp
     /// @param duration crowdsurance coverage duration
     /// @param amount join amount
     /// @param claim claim amount
@@ -42,6 +43,7 @@ contract TokenCrowdsurance is TokenPool {
     /// @param status crowdsurance status
     struct Crowdsurance {
         uint    timeStamp;  // join time stamp
+        uint    activated;  // coverage activation time stamp
         uint    duration;   // risk coverage duration
         uint256 amount;     // join amount
         uint256 claim;      // claim amount
@@ -68,8 +70,17 @@ contract TokenCrowdsurance is TokenPool {
     /// @param score member scoring
     /// @param amount join amount
     event Scoring(address member, uint256 score, uint256 amount);
+    /// TokenCrowdsurance Activate event
+    /// @param id NFT Id to activate
+    /// @param amount acowdsurance join amount
+    /// @param score member scoring
+    event Activate(uint256 id, uint256 amount, uint256 score);
+    /// TokenCrowdsurance Activate event
+    /// @param id NFT Id to activate
+    /// @param claim claim amount
+    event Claim(uint256 id, uint256 claim);
     /// TokenCrowdsurance Status
-    enum Status {Init, Active, Claim, Closed}
+    enum Status {Init, Active, Claim, Approved, Rejected, Closed}
     /// scoring function
     /// @param _member address of the member to score
     /// @param _score member scoroing result
@@ -105,6 +116,7 @@ contract TokenCrowdsurance is TokenPool {
         // Create extension 
         Crowdsurance memory _crowdsurance = Crowdsurance ({
             timeStamp: now,
+            activated: uint(0),
             duration: template.duration,
             amount: amount,
             claim: template.claim,
@@ -123,12 +135,42 @@ contract TokenCrowdsurance is TokenPool {
         delete addressToAmount[member];
         delete addressToScore[member];
     }
+    /// activate function 
+    /// @param _id NFT token ID to activate
+    function activate(uint256 _id) public {
+        require(_id != uint256(0));
+        require(_owns(msg.sender, _id));
+        require(tokenIdToExtension[_id].amount != uint256(0));
+
+        nfts[_id].state = StateBlocked; // block transfer
+        tokenIdToExtension[_id].status = uint(Status.Active);
+        tokenIdToExtension[_id].activated = now;
+        // emit event
+        Activate(_id, tokenIdToExtension[_id].amount, tokenIdToExtension[_id].score);
+    }
+    /// claim function
+    /// @param _id NFT token ID to claim payment 
+    /// @param _claim claim amount
+    function claim(uint256 _id, uint256 _claim) public returns(bool) {
+        require(_id != uint256(0));
+        require(_owns(msg.sender, _id));
+        require(_claim != uint256(0));
+        require(tokenIdToExtension[_id].status == uint(Status.Active));
+        require((tokenIdToExtension[_id].claim + _claim) <= template.claim);
+
+        tokenIdToExtension[_id].status = uint(Status.Claim);
+        tokenIdToExtension[_id].claim = tokenIdToExtension[_id].claim + _claim;
+        // emit event
+        Claim(_id, _claim);
+        return true;
+    }
     function TokenCrowdsurance(string _name, string _symbol) TokenPool(_name, _symbol) public {
         template.timeStamp = now;
+        template.activated = uint(0);
         template.duration = uint(60*60*24*180);
-        template.amount = 0.1 ether;
-        template.claim = uint256(0);
-        template.paid = uint256(0);
+        template.amount = 0.1 ether;                // default join amount
+        template.claim = 10 ether;                  // max claim amount
+        template.paid = 10 ether * 100 / 80;        // max paid amount
         template.score = uint256(100);
         template.status = uint(Status.Init);
     }

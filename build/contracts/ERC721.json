@@ -408,7 +408,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 2144,
+          "SourceUnit": 3990,
           "absolutePath": "/Users/sergei/ERC721SmartToken/contracts/interfaces/IERC721.sol",
           "file": "./interfaces/IERC721.sol",
           "scope": 1315,
@@ -424,14 +424,14 @@
       {
         "attributes": {
           "contractDependencies": [
-            2143
+            3989
           ],
           "contractKind": "contract",
           "documentation": "ERC721 non-fungible token",
           "fullyImplemented": true,
           "linearizedBaseContracts": [
             1314,
-            2143
+            3989
           ],
           "name": "ERC721",
           "scope": 1315
@@ -448,7 +448,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "IERC721",
-                  "referencedDeclaration": 2143,
+                  "referencedDeclaration": 3989,
                   "type": "contract IERC721"
                 },
                 "id": 647,
@@ -673,7 +673,7 @@
                           "overloadedDeclarations": [
                             null
                           ],
-                          "referencedDeclaration": 2166,
+                          "referencedDeclaration": 4012,
                           "type": "function () pure returns (bytes32)",
                           "value": "keccak256"
                         },
@@ -928,7 +928,7 @@
                                                               "overloadedDeclarations": [
                                                                 null
                                                               ],
-                                                              "referencedDeclaration": 2166,
+                                                              "referencedDeclaration": 4012,
                                                               "type": "function () pure returns (bytes32)",
                                                               "value": "keccak256"
                                                             },
@@ -1023,7 +1023,7 @@
                                                               "overloadedDeclarations": [
                                                                 null
                                                               ],
-                                                              "referencedDeclaration": 2166,
+                                                              "referencedDeclaration": 4012,
                                                               "type": "function () pure returns (bytes32)",
                                                               "value": "keccak256"
                                                             },
@@ -1123,7 +1123,7 @@
                                                           "overloadedDeclarations": [
                                                             null
                                                           ],
-                                                          "referencedDeclaration": 2166,
+                                                          "referencedDeclaration": 4012,
                                                           "type": "function () pure returns (bytes32)",
                                                           "value": "keccak256"
                                                         },
@@ -1223,7 +1223,7 @@
                                                       "overloadedDeclarations": [
                                                         null
                                                       ],
-                                                      "referencedDeclaration": 2166,
+                                                      "referencedDeclaration": 4012,
                                                       "type": "function () pure returns (bytes32)",
                                                       "value": "keccak256"
                                                     },
@@ -1323,7 +1323,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 2166,
+                                                  "referencedDeclaration": 4012,
                                                   "type": "function () pure returns (bytes32)",
                                                   "value": "keccak256"
                                                 },
@@ -1423,7 +1423,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 2166,
+                                              "referencedDeclaration": 4012,
                                               "type": "function () pure returns (bytes32)",
                                               "value": "keccak256"
                                             },
@@ -1523,7 +1523,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 2166,
+                                          "referencedDeclaration": 4012,
                                           "type": "function () pure returns (bytes32)",
                                           "value": "keccak256"
                                         },
@@ -1623,7 +1623,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2166,
+                                      "referencedDeclaration": 4012,
                                       "type": "function () pure returns (bytes32)",
                                       "value": "keccak256"
                                     },
@@ -1723,7 +1723,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 2166,
+                                  "referencedDeclaration": 4012,
                                   "type": "function () pure returns (bytes32)",
                                   "value": "keccak256"
                                 },
@@ -1823,7 +1823,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2166,
+                              "referencedDeclaration": 4012,
                               "type": "function () pure returns (bytes32)",
                               "value": "keccak256"
                             },
@@ -2741,7 +2741,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2163,
+                              "referencedDeclaration": 4009,
                               "type": "function (bool) pure",
                               "value": "assert"
                             },
@@ -4165,7 +4165,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -5271,7 +5271,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -6276,7 +6276,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2115,
+              "superFunction": 3961,
               "visibility": "public"
             },
             "children": [
@@ -6372,7 +6372,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2120,
+              "superFunction": 3966,
               "visibility": "public"
             },
             "children": [
@@ -6468,7 +6468,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2142,
+              "superFunction": 3988,
               "visibility": "external"
             },
             "children": [
@@ -6736,7 +6736,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2064,
+              "superFunction": 3910,
               "visibility": "public"
             },
             "children": [
@@ -7047,7 +7047,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "nonpayable",
-              "superFunction": 2085,
+              "superFunction": 3931,
               "visibility": "external"
             },
             "children": [
@@ -7151,7 +7151,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -7287,7 +7287,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -7364,7 +7364,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2189,
+                                      "referencedDeclaration": 4035,
                                       "type": "contract ERC721",
                                       "value": "this"
                                     },
@@ -7420,7 +7420,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -7484,7 +7484,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2172,
+                                      "referencedDeclaration": 4018,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -7588,7 +7588,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 2172,
+                                  "referencedDeclaration": 4018,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -7661,7 +7661,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "nonpayable",
-              "superFunction": 2078,
+              "superFunction": 3924,
               "visibility": "external"
             },
             "children": [
@@ -7765,7 +7765,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -7829,7 +7829,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2172,
+                                      "referencedDeclaration": 4018,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -8011,7 +8011,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 2172,
+                                  "referencedDeclaration": 4018,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -8084,7 +8084,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "nonpayable",
-              "superFunction": 2094,
+              "superFunction": 3940,
               "visibility": "external"
             },
             "children": [
@@ -8214,7 +8214,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -8350,7 +8350,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -8427,7 +8427,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2189,
+                                      "referencedDeclaration": 4035,
                                       "type": "contract ERC721",
                                       "value": "this"
                                     },
@@ -8483,7 +8483,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -8547,7 +8547,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 2172,
+                                      "referencedDeclaration": 4018,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -8617,7 +8617,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -8824,7 +8824,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2057,
+              "superFunction": 3903,
               "visibility": "public"
             },
             "children": [
@@ -9145,7 +9145,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2071,
+              "superFunction": 3917,
               "visibility": "external"
             },
             "children": [
@@ -9326,7 +9326,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2175,
+                              "referencedDeclaration": 4021,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -9480,7 +9480,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2128,
+              "superFunction": 3974,
               "visibility": "external"
             },
             "children": [
@@ -9648,7 +9648,7 @@
               "payable": false,
               "scope": 1314,
               "stateMutability": "view",
-              "superFunction": 2135,
+              "superFunction": 3981,
               "visibility": "public"
             },
             "children": [
@@ -9933,7 +9933,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 2172,
+                                  "referencedDeclaration": 4018,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -10084,5 +10084,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-04-09T13:37:14.203Z"
+  "updatedAt": "2018-04-09T19:12:07.227Z"
 }

@@ -53,6 +53,12 @@ contract TokenPool is TokenContainer {
     /// @param id NFT token ID that emits event
     /// @param value 2nd tier capital call value
     event SecondTierCall(uint256 id, uint256 value);
+    /// TokenPool ShortOfFunds event
+    /// @param id NFT token ID that emits event
+    /// @param poolId pool ID that can't pay
+    /// @param value that pool can't pay
+    /// @param level pool level that can't 
+    event ShortOfFunds(uint256 id, uint256 poolId, uint256 value, uint8 level);
     /// TokenPool Payment Value event
     /// @param id NFT token ID that emits event
     /// @param value paid value
@@ -223,18 +229,23 @@ contract TokenPool is TokenContainer {
             PaymentValue(_id, _value, uint8(2));
         }
         else if (_value <= nfts[poolId].value) {
+            ShortOfFunds(_id, subPoolId, _value, uint8(2));
+
             distribution[1] = _value;
             nfts[poolId].value = nfts[poolId].value - _value;
 
             PaymentValue(_id, _value, uint8(1));
         }
         else if (_value <= nfts[superPoolId].value) {
+            ShortOfFunds(_id, poolId, _value, uint8(1));
+
             distribution[0] = _value;
             nfts[superPoolId].value = nfts[superPoolId].value - _value;
 
             PaymentValue(_id, _value, uint8(0));
         }
         else {
+            ShortOfFunds(_id, superPoolId, _value, uint8(0));
             SecondTierCall(_id, _value);
         }
     }
