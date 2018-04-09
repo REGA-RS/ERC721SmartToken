@@ -32,8 +32,27 @@ import './TokenPool.sol';
 /// Crowdsurance, meaning people unite in communities to provide a guarantee of compensation for unexpected loss. 
 /// Using ERC721SmartToken crowdsurance product can be 'tokenized' and can be availible as ERC20 token.
 contract TokenCrowdsurance is TokenPool {
-    mapping (address => uint256) public addressToAmount;
-    mapping (address => uint256) public addressToScore;
+    /// Crowdsurance token ERC721 extention
+    /// @param timeStamp join time stemp
+    /// @param duration crowdsurance coverage duration
+    /// @param amount join amount
+    /// @param claim claim amount
+    /// @param paid paid claim amount
+    /// @param score member score
+    /// @param status crowdsurance status
+    struct Crowdsurance {
+        uint    timeStamp;  // join time stamp
+        uint    duration;   // risk coverage duration
+        uint256 amount;     // join amount
+        uint256 claim;      // claim amount
+        uint256 paid;       // paid amoutn
+        uint256 score;      // score
+        uint    status;     // current status
+    }
+    Crowdsurance public template;
+    mapping (address => uint256) public addressToAmount;            // address to join amount mapping
+    mapping (address => uint256) public addressToScore;             // address to scoring mapping
+    mapping (uint256 => Crowdsurance) public tokenIdToExtension;    // crowdsurance extension mapping
     /// TokenCrowdsurance Apply event
     /// @param member new member address
     /// @param score member score
@@ -83,8 +102,18 @@ contract TokenCrowdsurance is TokenPool {
         require(amount == addressToAmount[member]);
         uint256 id = _createNFT(amount, "Crowdsurance", uint256(0), member);
         require(id != uint(0));
-        // set status
-        nfts[id].state = uint256(Status.Init);
+        // Create extension 
+        Crowdsurance memory _crowdsurance = Crowdsurance ({
+            timeStamp: now,
+            duration: template.duration,
+            amount: amount,
+            claim: template.claim,
+            paid: template.paid,
+            score: score,
+            status: template.status
+        });
+        // add extension
+        tokenIdToExtension[id] = _crowdsurance;
         // now insert in the pool
         insertPool(id);
         cowdsuranceId = id;
@@ -94,5 +123,13 @@ contract TokenCrowdsurance is TokenPool {
         delete addressToAmount[member];
         delete addressToScore[member];
     }
-    function TokenCrowdsurance(string _name, string _symbol) TokenPool(_name, _symbol) public {}
+    function TokenCrowdsurance(string _name, string _symbol) TokenPool(_name, _symbol) public {
+        template.timeStamp = now;
+        template.duration = uint(60*60*24*180);
+        template.amount = 0.1 ether;
+        template.claim = uint256(0);
+        template.paid = uint256(0);
+        template.score = uint256(100);
+        template.status = uint(Status.Init);
+    }
 }

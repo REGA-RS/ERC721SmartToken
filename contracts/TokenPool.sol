@@ -78,10 +78,20 @@ contract TokenPool is TokenContainer {
     /// @param _id NFT token ID to inserr
     /// @param _level Pool level to insert
     /// @return TRUE if insert is done 
+    function _getParent(uint256 _id, uint8 _level) internal view returns (uint256 parentId) {
+        // by default returns pools[_level].last but must be overloaded to use score to calculate right pool
+        _id;
+        parentId = pools[_level].last;
+    }
+    function _getCapacity(uint256 _id, uint8 _level) internal view returns (uint256 parentId) {
+        // by default returns pools[_level].maxMember - 1; but can be overloaded to use score to calculate right pool capacity
+        _id;
+        parentId = pools[_level].maxMember - 1;
+    }
     function _insertPool(uint256 _id, uint8 _level) internal returns (bool) {
-        uint256 parentId = pools[_level].last;      // pool NFT token ID
+        uint256 parentId = _getParent(_id, _level); // pool NFT token ID
         uint256 size = _getPoolSize(parentId);      // current pool size
-        uint256 max = pools[_level].maxMember - 1;  // max pool size - 1
+        uint256 max = _getCapacity(_id, _level);    // max pool size - 1
         // check if there is a place to insert 
         if (size < max) {
             // simple insert

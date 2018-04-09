@@ -1158,9 +1158,9 @@
             1300,
             1761,
             1841,
-            3440,
-            3613,
-            3630
+            3570,
+            3743,
+            3760
           ],
           "contractKind": "contract",
           "documentation": "TokenContainer is ERC721SmartToken that provide hierarchical structure for token pools",
@@ -1169,11 +1169,11 @@
             2171,
             1761,
             1841,
-            3630,
+            3760,
             643,
-            3440,
+            3570,
             1300,
-            3613
+            3743
           ],
           "name": "TokenContainer",
           "scope": 2172
@@ -1560,7 +1560,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3645,
+                              "referencedDeclaration": 3775,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1781,7 +1781,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3645,
+                              "referencedDeclaration": 3775,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2002,7 +2002,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3645,
+                              "referencedDeclaration": 3775,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2669,7 +2669,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3645,
+                              "referencedDeclaration": 3775,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2981,7 +2981,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3645,
+                              "referencedDeclaration": 3775,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3941,7 +3941,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3645,
+                              "referencedDeclaration": 3775,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -4685,7 +4685,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3645,
+                              "referencedDeclaration": 3775,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -5818,5 +5818,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-04-08T13:11:51.045Z"
+  "updatedAt": "2018-04-09T13:05:41.490Z"
 }

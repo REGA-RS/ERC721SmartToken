@@ -102,6 +102,7 @@ contract ERC721SmartToken is ERC721, ERC20Controller, Owned() {
         require(_value != uint256(0));
         require(_fromId != _toId);
         require(nfts[_fromId].value >= _value);
+        require(nfts[_fromId].state != StateBlocked);
 
         nfts[_fromId].value = nfts[_fromId].value - _value;
         nfts[_toId].value = nfts[_toId].value + _value;

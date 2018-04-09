@@ -31,8 +31,12 @@ import './interfaces/IERC721.sol';
 
 /// ERC721 non-fungible token
 contract ERC721 is IERC721 {
-    /// @dev token name
-    string _name; string _symbol;
+    /// @dev token name and symbol
+    string _name; 
+    /// @dev token symbol
+    string _symbol;
+    /// @dev stateBlocked
+    uint256 constant StateBlocked = uint256(1024);
     /// @dev interface signature ERC165
     bytes4 constant InterfaceSignature_ERC165 =
         bytes4(keccak256("supportsInterface(bytes4)"));
@@ -98,6 +102,9 @@ contract ERC721 is IERC721 {
     /// @param _to address to transfer to
     /// @param _tokenId NFT token ID to transfer
     function _transfer(address _from, address _to, uint256 _tokenId) internal {
+
+        assert(nfts[_tokenId].state != StateBlocked);
+        
         ownershipTokenCount[_to]++;
         tokenIndexToOwner[_tokenId] = _to;
 
