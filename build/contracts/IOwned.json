@@ -50,7 +50,7 @@
       "absolutePath": "/Users/sergei/ERC721SmartToken/contracts/interfaces/IOwned.sol",
       "exportedSymbols": {
         "IOwned": [
-          4006
+          4144
         ]
       }
     },
@@ -64,7 +64,7 @@
             ".18"
           ]
         },
-        "id": 3991,
+        "id": 4129,
         "name": "PragmaDirective",
         "src": "0:24:11"
       },
@@ -80,10 +80,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            4006
+            4144
           ],
           "name": "IOwned",
-          "scope": 4007
+          "scope": 4145
         },
         "children": [
           {
@@ -96,7 +96,7 @@
               ],
               "name": "owner",
               "payable": false,
-              "scope": 4006,
+              "scope": 4144,
               "stateMutability": "pure",
               "superFunction": null,
               "visibility": "public"
@@ -109,7 +109,7 @@
                   ]
                 },
                 "children": [],
-                "id": 3992,
+                "id": 4130,
                 "name": "ParameterList",
                 "src": "211:2:11"
               },
@@ -119,7 +119,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 3997,
+                      "scope": 4135,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -132,17 +132,17 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 3993,
+                        "id": 4131,
                         "name": "ElementaryTypeName",
                         "src": "235:7:11"
                       }
                     ],
-                    "id": 3994,
+                    "id": 4132,
                     "name": "VariableDeclaration",
                     "src": "235:7:11"
                   }
                 ],
-                "id": 3995,
+                "id": 4133,
                 "name": "ParameterList",
                 "src": "234:9:11"
               },
@@ -153,12 +153,12 @@
                   ]
                 },
                 "children": [],
-                "id": 3996,
+                "id": 4134,
                 "name": "Block",
                 "src": "244:2:11"
               }
             ],
-            "id": 3997,
+            "id": 4135,
             "name": "FunctionDefinition",
             "src": "197:49:11"
           },
@@ -173,7 +173,7 @@
               ],
               "name": "transferOwnership",
               "payable": false,
-              "scope": 4006,
+              "scope": 4144,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -185,7 +185,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_newOwner",
-                      "scope": 4002,
+                      "scope": 4140,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -198,17 +198,17 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 3998,
+                        "id": 4136,
                         "name": "ElementaryTypeName",
                         "src": "279:7:11"
                       }
                     ],
-                    "id": 3999,
+                    "id": 4137,
                     "name": "VariableDeclaration",
                     "src": "279:17:11"
                   }
                 ],
-                "id": 4000,
+                "id": 4138,
                 "name": "ParameterList",
                 "src": "278:19:11"
               },
@@ -219,12 +219,12 @@
                   ]
                 },
                 "children": [],
-                "id": 4001,
+                "id": 4139,
                 "name": "ParameterList",
                 "src": "304:0:11"
               }
             ],
-            "id": 4002,
+            "id": 4140,
             "name": "FunctionDefinition",
             "src": "252:53:11"
           },
@@ -239,7 +239,7 @@
               ],
               "name": "acceptOwnership",
               "payable": false,
-              "scope": 4006,
+              "scope": 4144,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -252,7 +252,7 @@
                   ]
                 },
                 "children": [],
-                "id": 4003,
+                "id": 4141,
                 "name": "ParameterList",
                 "src": "334:2:11"
               },
@@ -263,22 +263,22 @@
                   ]
                 },
                 "children": [],
-                "id": 4004,
+                "id": 4142,
                 "name": "ParameterList",
                 "src": "343:0:11"
               }
             ],
-            "id": 4005,
+            "id": 4143,
             "name": "FunctionDefinition",
             "src": "310:34:11"
           }
         ],
-        "id": 4006,
+        "id": 4144,
         "name": "ContractDefinition",
         "src": "61:285:11"
       }
     ],
-    "id": 4007,
+    "id": 4145,
     "name": "SourceUnit",
     "src": "0:346:11"
   },
@@ -288,5 +288,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-04-09T19:12:07.235Z"
+  "updatedAt": "2018-04-10T18:50:12.646Z"
 }

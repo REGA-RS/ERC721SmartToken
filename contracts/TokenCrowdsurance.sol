@@ -41,6 +41,10 @@ contract TokenCrowdsurance is TokenPool {
     /// @param paid paid claim amount
     /// @param score member score
     /// @param status crowdsurance status
+    /// @param claimed claim time stamp
+    /// @param timeToVote voting period
+    /// @param positive votes to pay claims
+    /// @param negative votes not to pay
     struct Crowdsurance {
         uint    timeStamp;  // join time stamp
         uint    activated;  // coverage activation time stamp
@@ -50,11 +54,26 @@ contract TokenCrowdsurance is TokenPool {
         uint256 paid;       // paid amoutn
         uint256 score;      // score
         uint    status;     // current status
+        uint    claimed;    // claim time stamp
+        uint8   timeToVote; // voting period
+        uint8   positive;   // votes to pay claims
+        uint8   negative;   // votes not to pay    
     }
+    /// Crowdsurance voting 
+    /// @param weight voter weight
+    /// @param voted true if voted
+    /// @param tokenId Crowdsurance NFT token ID to vote
+    struct Voter {
+        uint    weight;
+        bool    voted;
+        uint256 tokenId;
+    }
+    /// Crowdsurance template
     Crowdsurance public template;
     mapping (address => uint256) public addressToAmount;            // address to join amount mapping
     mapping (address => uint256) public addressToScore;             // address to scoring mapping
     mapping (uint256 => Crowdsurance) public tokenIdToExtension;    // crowdsurance extension mapping
+    mapping (address => Voter) public voters;                       // crowdsurance voting
     /// TokenCrowdsurance Apply event
     /// @param member new member address
     /// @param score member score
@@ -122,7 +141,11 @@ contract TokenCrowdsurance is TokenPool {
             claim: template.claim,
             paid: template.paid,
             score: score,
-            status: template.status
+            status: template.status,
+            claimed: uint(0),
+            timeToVote: template.timeToVote,
+            positive: uint8(0),
+            negative: uint8(0)
         });
         // add extension
         tokenIdToExtension[id] = _crowdsurance;
@@ -164,6 +187,20 @@ contract TokenCrowdsurance is TokenPool {
         Claim(_id, _claim);
         return true;
     }
+    function addVoter(address _jury, uint256 _id) ownerOnly public {
+        require(_jury != address(0));
+        require(_id != uint256(0));
+        require(tokenIdToExtension[_id].status == uint(Status.Claim));
+        uint votingEnd = tokenIdToExtension[_id].claimed + tokenIdToExtension[_id].timeToVote;
+        require(votingEnd > now);
+        
+        Voter memory _voter = Voter({
+            weight: 1,
+            voted: false,
+            tokenId: _id
+        });
+        voters[_jury] = _voter;
+    }
     function TokenCrowdsurance(string _name, string _symbol) TokenPool(_name, _symbol) public {
         template.timeStamp = now;
         template.activated = uint(0);
@@ -173,5 +210,9 @@ contract TokenCrowdsurance is TokenPool {
         template.paid = 10 ether * 100 / 80;        // max paid amount
         template.score = uint256(100);
         template.status = uint(Status.Init);
+        template.claimed = uint(0);
+        template.timeToVote = uint8(60*60*24*2);
+        template.positive = uint8(0);
+        template.negative = uint8(0);
     }
 }
