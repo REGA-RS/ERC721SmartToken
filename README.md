@@ -139,4 +139,9 @@ This function will return the Crowdsurance NFT token ID. The member can check jo
 ```solidity
 function apply() public view returns(uint256 amount);
 ```
- 
+If ```amount``` is 0 then new member need to wait for scoring to be complited first.
+The ```TokenCrowdsurance``` is ```ERC721``` token and can be transfered to another holder using standard ```ERC721``` methods. To activate crowdsurance coverage the token holder must call ```activate``` function:
+```solidity
+function activate(uint256 _id) public;
+```
+after then the coverage is activated and token transfer is prohibited.
