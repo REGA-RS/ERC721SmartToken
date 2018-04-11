@@ -144,4 +144,13 @@ The ```TokenCrowdsurance``` is ```ERC721``` token and can be transfered to anoth
 ```solidity
 function activate(uint256 _id) public;
 ```
-after then the coverage is activated and token transfer is prohibited.
+after then the coverage is activated and token transfer is prohibited. In case of risk realisation the token holder can submeet claim to recieve the payment:
+```solidity
+function claim(uint256 _id, uint256 _claim) public returns(bool);
+```
+In this function the token owner provides token id ```_id``` and ```_claim``` - the claim amount. The token status will be changed to ```Claim``` and the voting process will be initiated.
+To conduct the voting process a juries must be selected randomly from ```RST``` token holders. Each jury member will be submeeted by contract owner:
+```solidity
+function addVoter(address _jury, uint256 _id) ownerOnly public;
+```
+and for each ```_jury``` will be specified the token ```_id``` for voting.
