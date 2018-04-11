@@ -1030,7 +1030,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 3871,
+          "SourceUnit": 4360,
           "absolutePath": "/Users/sergei/ERC721SmartToken/contracts/interfaces/IERC20.sol",
           "file": "./interfaces/IERC20.sol",
           "scope": 1785,
@@ -1079,9 +1079,9 @@
             643,
             1314,
             1864,
-            3954,
-            4127,
-            4144
+            4443,
+            4616,
+            4633
           ],
           "contractKind": "contract",
           "documentation": "ERC721SmartToken contract implements non-fungible tokens based on ERC721 standard that also supports ERC20 interface. \n The contract is subclass of ERC721, ERC20Controller and Owned contracts\n @dev All function calls are currently implement without side effects",
@@ -1089,11 +1089,11 @@
           "linearizedBaseContracts": [
             1784,
             1864,
-            4144,
+            4633,
             643,
-            3954,
+            4443,
             1314,
-            4127
+            4616
           ],
           "name": "ERC721SmartToken",
           "scope": 1785
@@ -1702,7 +1702,7 @@
               "payable": false,
               "scope": 1784,
               "stateMutability": "view",
-              "superFunction": 3877,
+              "superFunction": 4366,
               "visibility": "public"
             },
             "children": [
@@ -2247,7 +2247,7 @@
               "payable": false,
               "scope": 1784,
               "stateMutability": "view",
-              "superFunction": 3884,
+              "superFunction": 4373,
               "visibility": "public"
             },
             "children": [
@@ -3127,7 +3127,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3244,7 +3244,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3361,7 +3361,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3497,7 +3497,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3591,7 +3591,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3731,7 +3731,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -4976,7 +4976,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -5093,7 +5093,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -5626,7 +5626,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -5743,7 +5743,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -5879,7 +5879,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -6439,7 +6439,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -6870,7 +6870,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -7365,7 +7365,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4159,
+                              "referencedDeclaration": 4648,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -7698,5 +7698,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-04-10T18:50:12.648Z"
+  "updatedAt": "2018-04-11T10:16:08.347Z"
 }
