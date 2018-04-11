@@ -153,4 +153,12 @@ To conduct the voting process a juries must be selected randomly from ```RST``` 
 ```solidity
 function addVoter(address _jury, uint256 _id) ownerOnly public;
 ```
-and for each ```_jury``` will be specified the token ```_id``` for voting.
+and for each ```_jury``` will be specified the token ```_id``` for voting. Selected RST token holders could vote using the following method:
+```solidity
+function vote(uint256 _id, bool _positive) public;
+``` 
+providing the ```TokenCrowdsurance``` id and voting result ```_positive```. If ```_positive``` is ```true``` then the vote will be counted in favore of claim payment and if ```false``` then the vote will be counted as negative one. The current voting status can be recieved from the following function call:
+```solidity
+function votingStatus(uint256 _id) public view returns (bool votingEnded, uint8 positive, uint8 negative);
+```
+Need to say that the voting process have start and end time and votes can be counted only within this specific period.
