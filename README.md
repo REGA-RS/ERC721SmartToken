@@ -162,3 +162,23 @@ providing the ```TokenCrowdsurance``` id and voting result ```_positive```. If `
 function votingStatus(uint256 _id) public view returns (bool votingEnded, uint8 positive, uint8 negative);
 ```
 Need to say that the voting process have start and end time and votes can be counted only within this specific period.
+When the voting process is finished the token owner can recieve the payment calling the following method:
+```solidity
+ function payment(uint256 _id) public;
+ ```
+ If the claim was approved by the juries then the payment amount will be transferred from ```TokenCrowdsurance``` smart contract account to the token holder account. If nobody has voted or number of votes less then the crowdsurance product ```minJuriesNumber``` parameter or ```positive``` is equal to ```negative``` then the token owner will receive join amount.
+ There are number of parameters for crowdsurance product that can be utilized to adjust the product behaviour.
+ ```solidity
+ struct Parameters {
+        uint256     joinAmount;         // default join amount
+        uint        coverageDuration;   // coverage duration
+        uint256     maxClaimAmount;     // max claim amount
+        uint8       maxClaimNumber;     // max claim number for the contract
+        uint8       paymentRatio;       // claim to payment patio
+        uint256     maxPaymentAmount;   // max payment amount for the contract
+        uint8       minJuriesNumber;    // min juries number to count voting 
+        uint        votingDuration;     // juries voting duration
+        uint8       juriesNumber;       // number of juries
+  }
+  ``` 
+
