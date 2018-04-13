@@ -127,6 +127,7 @@ function _payValue(uint256 _id, uint256 _value) internal returns(uint256[4] dist
 ## TokenCrowdsurance
 
 ```TokenCrowdsurance``` is ```ERC721SmartToken``` for crowdsurance products. Crowdsurance, meaning people unite in communities to provide a guarantee of compensation for unexpected loss. Using ```ERC721SmartToken``` crowdsurance product can be 'tokenized' and can be availible as ERC20 token.
+![pic](ERC721SmartToken/TokenCrowdsurance.png)
 The crowdsurance business process starting from ```scoring``` function that will provide score and join amount for the new member:
 ```solidity
  function scoring(address _member, uint256 _score, uint256 _amount) ownerOnly public;
