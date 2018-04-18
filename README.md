@@ -200,4 +200,7 @@ The ```LuggageCrowdsurance``` token has the following parameters:
 Product parameter|Value
 ------------|-------------
 Default join amount|0.1 ETH
-Crowdsurance protection period|180 days
+Protection period|180 days
+Default claim payment amount|10 ETH
+Maximum number of claims|1
+RST / ETH Rate|0.12 ETH
