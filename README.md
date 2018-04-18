@@ -206,3 +206,15 @@ Protection period|180 days
 Default claim payment amount|10 ETH
 Maximum number of claims|1
 RST / ETH Rate|0.12 ETH
+Payback ratio|50%
+
+After the crowdsurance coverage period is ended the token owner can recieve payback up to ```Payback ratio``` from the join amount if he/she did not recieved a paiment during the crowdsurance coverage period. To get payback the owner must call the following function:
+```solidity
+ function getPayback(uint256 _id) public;
+ ```
+ The payback amout must be seted by the contract owner before the ```getPayback``` call using:
+ ```solidity
+ function setPayback(uint256 _id, uint256 _amount) ownerOnly public returns (bool);
+ ```
+ 
+
