@@ -35,8 +35,9 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
     /// REGA Risk Sharing Token smart contract address
     IERC20Token public  RST;                // RST smart contract address
     uint256     public  joinAmountRST;      // Join amount in RST
-    bool        public  RSTOnly;            // Join only for RST tokens
+    bool        public  ETHOnly;            // Join only for RST tokens
     uint8       public  maxHold;            // Maximum number of toikens for one address
+    uint256     public  rstETHRate;         // RST/ETH rate
     /// join function
     /// @return cowdsuranceId NFT token ID for created crowdsurance
     function join() public payable returns(uint256 cowdsuranceId) {
@@ -46,16 +47,16 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         require(score != uint256(0));
         require(balanceOf(member) < maxHold);
 
-        if (RSTOnly) {
+        if (!ETHOnly && msg.value == uint256(0)) {
             // now need to check that the member has approved the transfer joinAmountRST to join
             require(RST != address(0));                     // check that we have valid contract address
             require(joinAmountRST != uint256(0));           // join RST amount must be > 0
             uint256 rstAmt = RST.allowance(member, owner);  // check if the member has gave permision to spend some amount
             require(rstAmt >= joinAmountRST);               // ... and check if allowance is more then joinAmount
             amount = addressToAmount[member];               // get join amount and check...
-            require(rstAmt >= amount && amount >= joinAmountRST);
+            require((rstAmt * rstETHRate) >= amount && amount >= parameters.joinAmount);
             // transfer join RST amount to the owner account
-            require(RST.transferFrom(member, owner, amount));
+            require(RST.transferFrom(member, owner, joinAmountRST));
         }
         else {
             require(amount != uint256(0) && amount >= parameters.joinAmount);
@@ -69,7 +70,8 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         // setting up contract parameters 
         RST = IERC20Token(_rst);
         joinAmountRST = _amount; 
-        RSTOnly = _only; 
+        ETHOnly = _only; 
         maxHold = _max;
+        rstETHRate = 0.12 ether;
     }
 }

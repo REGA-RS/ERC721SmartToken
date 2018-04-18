@@ -224,23 +224,29 @@ contract TokenPool is TokenContainer {
         require(superPoolId != uint256(0)); // SuperPool
         if(_value <= nfts[subPoolId].value) {
             distribution[2] = _value;
-            nfts[subPoolId].value = nfts[subPoolId].value - _value;
+            nfts[subPoolId].value = nfts[subPoolId].value - distribution[2];
 
             PaymentValue(_id, _value, uint8(2));
         }
-        else if (_value <= nfts[poolId].value) {
+        else if (_value <= nfts[poolId].value + nfts[subPoolId].value) {
             ShortOfFunds(_id, subPoolId, _value, uint8(2));
 
+            distribution[2] = nfts[subPoolId].value;
             distribution[1] = _value;
-            nfts[poolId].value = nfts[poolId].value - _value;
+            nfts[subPoolId].value = nfts[subPoolId].value - distribution[2];
+            nfts[poolId].value = nfts[poolId].value - distribution[1];
 
             PaymentValue(_id, _value, uint8(1));
         }
-        else if (_value <= nfts[superPoolId].value) {
+        else if (_value <= nfts[superPoolId].value + nfts[poolId].value + nfts[subPoolId].value) {
             ShortOfFunds(_id, poolId, _value, uint8(1));
 
+            distribution[2] = nfts[subPoolId].value;
+            distribution[1] = nfts[poolId].value;
             distribution[0] = _value;
-            nfts[superPoolId].value = nfts[superPoolId].value - _value;
+            nfts[subPoolId].value = nfts[subPoolId].value - distribution[2];
+            nfts[poolId].value = nfts[poolId].value - distribution[1];
+            nfts[superPoolId].value = nfts[superPoolId].value - distribution[0];
 
             PaymentValue(_id, _value, uint8(0));
         }
