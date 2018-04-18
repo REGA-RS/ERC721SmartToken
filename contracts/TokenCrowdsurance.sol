@@ -155,6 +155,31 @@ contract TokenCrowdsurance is TokenPool {
         // emit Apply event
         Apply(msg.sender, score, amount);
     }
+    function _join(address _member, uint256 _score, uint256 _amount) internal returns(uint256) {
+        uint256 id = _createNFT(_amount, "Crowdsurance", uint256(0), _member);
+        // Create extension 
+        Crowdsurance memory _crowdsurance = Crowdsurance ({
+            timeStamp: now,
+            activated: uint(0),
+            duration: parameters.coverageDuration,
+            amount: _amount,
+            paid: uint256(0),
+            score: _score,
+            claimNumber: uint8(0),
+            status: uint8(Status.Init)
+        });
+        // add extension
+        extensions[id] = _crowdsurance;
+        // now insert in the pool
+        insertPool(id);
+        // emit event 
+        Join(_member, id, _amount);
+        // clear mapping
+        delete addressToAmount[_member];
+        delete addressToScore[_member];
+        // return NFT token ID
+        return id;
+    } 
     /// join function
     /// @return cowdsuranceId NFT token ID for created crowdsurance
     function join() public payable returns(uint256 cowdsuranceId) {
@@ -164,29 +189,8 @@ contract TokenCrowdsurance is TokenPool {
         require(amount != uint256(0) && amount >= parameters.joinAmount);
         require(score != uint256(0));
         require(amount == addressToAmount[member]);
-        uint256 id = _createNFT(amount, "Crowdsurance", uint256(0), member);
-        require(id != uint(0));
-        // Create extension 
-        Crowdsurance memory _crowdsurance = Crowdsurance ({
-            timeStamp: now,
-            activated: uint(0),
-            duration: parameters.coverageDuration,
-            amount: amount,
-            paid: uint256(0),
-            score: score,
-            claimNumber: uint8(0),
-            status: uint8(Status.Init)
-        });
-        // add extension
-        extensions[id] = _crowdsurance;
-        // now insert in the pool
-        insertPool(id);
-        cowdsuranceId = id;
-        // emit event 
-        Join(member, id, amount);
-        // clear mapping
-        delete addressToAmount[member];
-        delete addressToScore[member];
+        // call internal _join after all checkups 
+        cowdsuranceId = _join(member, score, amount);
     }
     /// activate function 
     /// @param _id NFT token ID to activate

@@ -29,6 +29,7 @@ pragma solidity ^0.4.17;
 
 import './TokenCrowdsurance.sol';
 
+/// Luggage crowdsurance protection product based on TokenCrowdsurance NFT token 
 contract LuggageCrowdsurance is TokenCrowdsurance {
     function LuggageCrowdsurance() TokenCrowdsurance("Luggage Crowdsurance NFT", "LCS") public {
     }
