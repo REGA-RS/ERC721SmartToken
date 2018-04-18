@@ -187,5 +187,5 @@ When the voting process is finished the token owner can recieve the payment call
 The luggage crowdsurance protection product is ```TokenCrowdsurance``` NFT721SmartToken with additional features:
 1. New member could join crowdsurance smart contract make a transfer in RST tokens
 1. Number of luggage protection token for each member is limited by smart contract parameter ```maxHold```
-1. Join can be allowed only for RST tokens and NOT ETHER if smart contract parameter ```RSTOnly``` is set to ```true```
+1. Join can be allowed only with ETH and NOT RST if smart contract parameter ```ETHOnly``` is set to ```true```
 
