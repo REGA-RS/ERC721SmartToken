@@ -196,7 +196,8 @@ function approve(address _spender, uint256 _value) returns (bool success)
 Then the new member can call ```LuggageCrowdsurance``` ```join``` method with ```value == 0``` and in this case if ```ETHOnly == false``` the ```join``` will transfer ```joinAmountRST``` to the smart contract ```owner```. 
 
 The ```LuggageCrowdsurance``` token has the following parameters:
-Product parameter | Parameter value
------------- | -------------
-Default join amount | 0.1 ETH
-Crowdsurance protection period | 180 days
+
+Product parameter|Parameter value
+------------|-------------
+Default join amount|0.1 ETH
+Crowdsurance protection period|180 days
