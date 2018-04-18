@@ -189,3 +189,8 @@ The luggage crowdsurance protection product is ```TokenCrowdsurance``` NFT721Sma
 1. Number of luggage protection token for each member is limited by smart contract parameter ```maxHold```
 1. Join can be allowed only with ETH and NOT RST if smart contract parameter ```ETHOnly``` is set to ```true```
 
+If ```ETHOnly``` is ```false``` a new member can join the luggage crowdsurance smart contract using RST tokens. If this case the member should allow a transfer of ```joinAmountRST``` specified in the ```LuggageCrowdsurance``` smart contract to the contract ```owner``` using RST ERC20 standart method:
+```solidity
+function approve(address _spender, uint256 _value) returns (bool success)
+```
+Then the new member can call ```LuggageCrowdsurance``` ```join``` method with ```value == 0``` and in this case if ```ETHOnly == false``` the ```join``` will transfer ```joinAmountRST``` to the smart contract ```owner```. 
