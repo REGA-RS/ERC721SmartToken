@@ -199,6 +199,8 @@ The ```LuggageCrowdsurance``` token has the following parameters:
 
 Product parameter|Value
 ------------|-------------
+ERC721 Name|Luggage Crowdsurance NFT
+ERC721 Symbol|LCS
 Default join amount|0.1 ETH
 Protection period|180 days
 Default claim payment amount|10 ETH
