@@ -182,4 +182,6 @@ When the voting process is finished the token owner can recieve the payment call
         uint8       juriesNumber;       // number of juries
   }
   ``` 
+## LuggageCrowdsurance
 
+Luggage crowdsurance protection product
