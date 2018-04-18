@@ -94,7 +94,7 @@ contract TokenCrowdsurance is TokenPool {
     mapping (address => uint256) public addressToAmount;            // address to join amount mapping
     mapping (address => uint256) public addressToScore;             // address to scoring mapping
     mapping (uint256 => Crowdsurance) public extensions;            // crowdsurance extension mapping
-    mapping (address => uint256) public voters;                       // crowdsurance voting
+    mapping (address => uint256) public voters;                     // crowdsurance voting
     mapping (uint256 => Request) public requests;                   // crowdsurance token Id to Claim
     /// TokenCrowdsurance Apply event
     /// @param member new member address
@@ -214,7 +214,7 @@ contract TokenCrowdsurance is TokenPool {
         require(_owns(msg.sender, _id));
         require(_claim != uint256(0));
         require(extensions[_id].status == uint(Status.Active));
-        require((extensions[_id].claimNumber + 1) <= parameters.maxClaimNumber);
+        require(extensions[_id].claimNumber < parameters.maxClaimNumber);
         uint256 _payment = _claim * 100 / parameters.paymentRatio;
         require((extensions[_id].paid + _payment) <= parameters.maxPaymentAmount);
         uint coverageEnd = extensions[_id].activated + extensions[_id].duration;

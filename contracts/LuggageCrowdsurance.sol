@@ -38,6 +38,9 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
     bool        public  ETHOnly;            // Join only for RST tokens
     uint8       public  maxHold;            // Maximum number of toikens for one address
     uint256     public  rstETHRate;         // RST/ETH rate
+    uint8       public  paybackRatio;       // Payback ratio
+
+    mapping (uint256 => uint256) public payback;    // payback mapping
     /// join function
     /// @return cowdsuranceId NFT token ID for created crowdsurance
     function join() public payable returns(uint256 cowdsuranceId) {
@@ -65,6 +68,28 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         // call internal _join after all checkups 
         cowdsuranceId = _join(member, score, amount);
     }
+    /// set payback amount function
+    /// @param _id crowdsurance token ID
+    /// @param _amount payback amount to set
+    function setPayback(uint256 _id, uint256 _amount) ownerOnly public returns (bool) {
+        require(_id != uint256(0));
+        require(_amount != uint256(0));
+        require(_amount <= parameters.joinAmount * paybackRatio / 100);
+        require(extensions[_id].paid == uint256(0));
+        uint coverageEnd = extensions[_id].activated + extensions[_id].duration;
+        require(coverageEnd < now);
+        payback[_id] = _amount;
+        return true;
+    }
+    function getPayback(uint256 _id) public {
+        require(_owns(msg.sender, _id));
+        require(_id != uint256(0));
+        uint256 _amount = payback[_id];
+        require(_amount != uint256(0));
+        require(extensions[_id].paid == uint256(0));
+        extensions[_id].paid = _amount;
+        msg.sender.transfer(_amount);
+    }
     function LuggageCrowdsurance(address _rst, uint256 _amount, bool _only, uint8 _max) 
                 TokenCrowdsurance("Luggage Crowdsurance NFT", "LCS") public {
         // setting up contract parameters 
@@ -73,5 +98,6 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         ETHOnly = _only; 
         maxHold = _max;
         rstETHRate = 0.12 ether;
+        paybackRatio = 50;
     }
 }
