@@ -48,7 +48,6 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         address member = msg.sender;
         uint256 score = addressToScore[member];
         require(score != uint256(0));
-        require(balanceOf(member) < maxHold);
 
         if (!ETHOnly && msg.value == uint256(0)) {
             // now need to check that the member has approved the transfer joinAmountRST to join
@@ -71,6 +70,7 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
     /// set payback amount function
     /// @param _id crowdsurance token ID
     /// @param _amount payback amount to set
+    /// @return true if successful 
     function setPayback(uint256 _id, uint256 _amount) ownerOnly public returns (bool) {
         require(_id != uint256(0));
         require(_amount != uint256(0));
@@ -81,6 +81,8 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         payback[_id] = _amount;
         return true;
     }
+    /// get payback function
+    /// @param _id luggage protection token to get payback
     function getPayback(uint256 _id) public {
         require(_owns(msg.sender, _id));
         require(_id != uint256(0));
@@ -89,6 +91,13 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         require(extensions[_id].paid == uint256(0));
         extensions[_id].paid = _amount;
         msg.sender.transfer(_amount);
+    }
+    /// activate function 
+    /// @param _id NFT token ID to activate
+    function activate(uint256 _id) public {
+        address member = msg.sender;
+        require(balanceOf(member) < maxHold);   // check if number of tokens is not more then maxHold
+        super.activate(_id);
     }
     function LuggageCrowdsurance(address _rst, uint256 _amount, bool _only, uint8 _max) 
                 TokenCrowdsurance("Luggage Crowdsurance NFT", "LCS") public {
