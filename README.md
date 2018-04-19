@@ -203,9 +203,11 @@ Product parameter|Value
 ERC721 Name|Luggage Crowdsurance NFT
 ERC721 Symbol|LCS
 Default join amount|0.1 ETH
+Default join RST amount|1 RST
 Protection period|180 days
 Default claim payment amount|10 ETH
 Maximum number of claims|1
+Default maximun number of activated|3
 RST / ETH Rate|0.12 ETH
 Payback ratio|50%
 
