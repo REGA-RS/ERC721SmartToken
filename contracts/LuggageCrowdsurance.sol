@@ -99,6 +99,13 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
         require(balanceOf(member) < maxHold);   // check if number of tokens is not more then maxHold
         super.activate(_id);
     }
+    /// get commission function
+    function getCommission() ownerOnly public {
+        uint256 commission = nfts[0].value;
+        require(commission != uint256(0)); 
+        nfts[0].value = 0;
+        msg.sender.transfer(commission);
+    }
     function LuggageCrowdsurance(address _rst, uint256 _amount, bool _only, uint8 _max) 
                 TokenCrowdsurance("Luggage Crowdsurance NFT", "LCS") public {
         // setting up contract parameters 
