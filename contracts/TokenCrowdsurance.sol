@@ -319,6 +319,19 @@ contract TokenCrowdsurance is TokenPool {
         }
         delete requests[_id];
     }
+    /// status count function
+    /// @param _member address of token owner
+    /// @param _status status to check
+    function statusCount(address _member, uint8 _status) view public returns (uint256 count) {
+        uint256[] memory tokenIds = _tokensOfOwner(_member);
+        count = uint256(0);
+
+        for (uint256 i = 0; i < tokenIds.length; i++) {
+            if (extensions[tokenIds[i]].status == _status) {
+                count++;
+            }
+        }
+    }
     function TokenCrowdsurance(string _name, string _symbol) TokenPool(_name, _symbol) public {
         // setup default crowdsurance product parameters
         parameters.joinAmount = 0.1 ether;                  // default join amount

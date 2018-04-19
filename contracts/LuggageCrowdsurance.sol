@@ -96,7 +96,8 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
     /// @param _id NFT token ID to activate
     function activate(uint256 _id) public {
         address member = msg.sender;
-        require(balanceOf(member) < maxHold);   // check if number of tokens is not more then maxHold
+        // check if number of tokens is not more then maxHold
+        require(statusCount(member, uint8(Status.Active)) < maxHold);   
         super.activate(_id);
     }
     /// get commission function
