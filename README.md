@@ -185,9 +185,10 @@ When the voting process is finished the token owner can recieve the payment call
 ## LuggageCrowdsurance
 
 The luggage crowdsurance protection product is ```TokenCrowdsurance``` NFT721SmartToken with additional features:
-1. New member could join crowdsurance smart contract make a transfer in RST tokens
-1. Number of luggage protection token for each member is limited by smart contract parameter ```maxHold```
-1. Join can be allowed only with ETH and NOT RST if smart contract parameter ```ETHOnly``` is set to ```true```
+1. New member could join crowdsurance smart contract make a transfer in **RST tokens**
+1. Number of **activated** luggage protection token for each member is limited by smart contract parameter ```maxHold```
+1. Join can be allowed **only with ETH** if smart contract parameter ```ETHOnly``` is set to ```true```
+1. Member can receive a **payback** up to ```paybackRatio``` from join amount after the end of coverage  
 
 If ```ETHOnly``` is ```false``` a new member can join the luggage crowdsurance smart contract using RST tokens. If this case the member should allow a transfer of ```joinAmountRST``` specified in the ```LuggageCrowdsurance``` smart contract to the contract ```owner``` using RST ERC20 standart method:
 ```solidity
@@ -208,7 +209,7 @@ Maximum number of claims|1
 RST / ETH Rate|0.12 ETH
 Payback ratio|50%
 
-After the crowdsurance coverage period is ended the token owner can recieve payback up to ```Payback ratio``` from the join amount if he/she did not recieved a paiment during the crowdsurance coverage period. To get payback the owner must call the following function:
+After the crowdsurance coverage period is ended the token owner can recieve payback up to ```Payback ratio``` from the join amount if he/she did not recieved a payment during the crowdsurance coverage period. To get payback the owner must call the following function:
 ```solidity
  function getPayback(uint256 _id) public;
  ```
