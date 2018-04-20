@@ -111,20 +111,22 @@ contract LuggageCrowdsurance is TokenCrowdsurance {
                 TokenCrowdsurance("Luggage Crowdsurance NFT", "LCS") public {
         // setting up contract parameters 
         RST = IERC20Token(_rst);
+        parameters.joinAmount = 0.019 ether;
+        parameters.maxClaimAmount = 4 ether; 
         if (_amount == uint256(0)) {
-            joinAmountRST = 1; 
+            joinAmountRST = 5000000000; 
         }
         else {
             joinAmountRST = _amount; 
         }
         if (_max == uint8(0)) {
-            maxHold = 3;
+            maxHold = 5;
         }
         else {
             maxHold = _max;
         }
         ETHOnly = _only;
         rstETHRate = 0.12 ether;
-        paybackRatio = 50;
+        paybackRatio = 80;
     }
 }
