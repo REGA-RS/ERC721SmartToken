@@ -128,20 +128,23 @@ function _payValue(uint256 _id, uint256 _value) internal returns(uint256[4] dist
 
 ```TokenCrowdsurance``` is ```ERC721SmartToken``` for crowdsurance products. Crowdsurance, meaning people unite in communities to provide a guarantee of compensation for unexpected loss. Using ```ERC721SmartToken``` crowdsurance product can be 'tokenized' and can be availible as ERC20 token.
 ![pic](https://github.com/REGA-RS/ERC721SmartToken/blob/master/TokenCrowdsurance.png?raw=true "Crowdsurance")
-The crowdsurance business process starting from ```scoring``` function that will provide score and join amount for the new member:
+The crowdsurance business process starting from ```apply``` function that returns application ID:
 ```solidity
- function scoring(address _member, uint256 _score, uint256 _amount) ownerOnly public;
+ function apply() public returns(uint256 addId);
+ ```
+There is application queue supported by the smart contract and next application to process can be obtained by the following function:
+```solidity
+function getApplication() view public returns (address member, uint256 appId);
+ ```
+After that the scoring for the new member can be complited by the following call:
+```solidity
+function scoring(address _member, uint256 _score, uint256 _amount) ownerOnly public;
  ```
 The ```scoring``` can be called only by contract owner. After recieve score a new member can join the Crowdsurance smart contract using ```join``` function. 
 ```solidity
 function join() public payable returns(uint256 cowdsuranceId);
 ```
-This function will return the Crowdsurance NFT token ID. The member can check join amount with the following view method:
-```solidity
-function apply() public view returns(uint256 amount);
-```
-If ```amount``` is 0 then new member need to wait for scoring to be complited first.
-The ```TokenCrowdsurance``` is ```ERC721``` token and can be transfered to another holder using standard ```ERC721``` methods. To activate crowdsurance coverage the token holder must call ```activate``` function:
+This function will return the Crowdsurance NFT token ID. The ```TokenCrowdsurance``` is ```ERC721``` token and can be transfered to another holder using standard ```ERC721``` methods. To activate crowdsurance coverage the token holder must call ```activate``` function:
 ```solidity
 function activate(uint256 _id) public;
 ```
