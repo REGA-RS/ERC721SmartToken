@@ -202,14 +202,16 @@ Product parameter|Value
 ------------|-------------
 ERC721 Name|Luggage Crowdsurance NFT
 ERC721 Symbol|LCS
-Default join amount|0.1 ETH
-Default join RST amount|1 RST
+Default join amount|0.019 ETH
+Default join RST amount|0.5 RST
 Protection period|180 days
-Default claim payment amount|10 ETH
+Default claim payment amount|4 ETH
 Maximum number of claims|1
-Default maximun number of activated|3
+Maximun number of activated|5
 RST / ETH Rate|0.12 ETH
-Payback ratio|50%
+Payback ratio|80%
+Payback period|within 48 hours
+Commission|20%
 
 After the crowdsurance coverage period is ended the token owner can recieve payback up to ```Payback ratio``` from the join amount if he/she did not recieved a payment during the crowdsurance coverage period. To get payback the owner must call the following function:
 ```solidity
