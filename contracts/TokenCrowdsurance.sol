@@ -88,6 +88,21 @@ contract TokenCrowdsurance is TokenPool {
         uint8       minJuriesNumber;    // min juries number to count voting 
         uint        votingDuration;     // juries voting duration
         uint8       juriesNumber;       // number of juries
+        uint256     maxApplications;    // maximum number of unprocessed applications
+        uint256     averageScore;       // avarega score
+    }
+    /// New member application
+    /// @param timeStamp application time stamp
+    /// @param member new member address 
+    /// @param tokensToBuys number of tokens to buy
+    /// @param paymetMethod join payment method : 0 - ETH
+    /// @param processed application processing status
+    struct Application {
+        uint        timeStamp;          // application time stamp
+        address     member;             // new member address
+        uint8       tokensToBuy;        // number of tokens to buy
+        uint8       paymetMethod;       // payment method : 0 - ETH
+        bool        processed;          // processing status
     }
     /// Crowdsurance parameters
     Parameters public parameters;
@@ -96,11 +111,13 @@ contract TokenCrowdsurance is TokenPool {
     mapping (uint256 => Crowdsurance) public extensions;            // crowdsurance extension mapping
     mapping (address => uint256) public voters;                     // crowdsurance voting
     mapping (uint256 => Request) public requests;                   // crowdsurance token Id to Claim
+    mapping (address => uint256) public addressToApplication;       // address to application mapping
+    Application[] public applications;                              // applications
+    uint256 public appNumber;                                       // number of applications to process
     /// TokenCrowdsurance Apply event
     /// @param member new member address
-    /// @param score member score
-    /// @param amount need to pay to join
-    event Apply(address member, uint256 score, uint256 amount);
+    /// @param appId member appication id
+    event Apply(address member, uint256 appId);
     /// TokenCrowdsurance Join event
     /// @param member new member addrsss
     /// @param id NFT token id for crowdsurance token
@@ -132,8 +149,13 @@ contract TokenCrowdsurance is TokenPool {
     /// @param amount mayment amount
     /// @param status payment status (Approved, Rejected, Closed)
     event Payment(address reciever, uint256 id, uint256 amount, uint8 status);
+    /// FSSF event
+    /// @param member member address
+    /// @param appId application ID
+    event FSSF(address member, uint256 appId);
     /// TokenCrowdsurance Status
     enum Status {Init, Active, Claim, Approved, Rejected, Closed}
+    enum VotingState {Progress, Voted, Timeout}
     /// scoring function
     /// @param _member address of the member to score
     /// @param _score member scoroing result
@@ -144,21 +166,95 @@ contract TokenCrowdsurance is TokenPool {
         require(_amount != uint256(0) && _amount >= parameters.joinAmount);
         addressToAmount[_member] = _amount;
         addressToScore[_member] = _score;
+        
+        // clear appication
+        uint256 addId = addressToApplication[_member];
+        if(addId != uint256(0) && addId < applications.length) {
+            applications[addId].processed = true;
+            delete addressToApplication[_member];
+            appNumber--;
+            // if no more applications to process then clear the app array
+            if (appNumber == uint256(0)) {
+                delete applications;
+            }
+        }
+
         // emit scoring event
         Scoring(_member, _score, _amount);
     }
-    /// apply function 
-    /// @return join ampount - must be not zero to join
-    function apply() public view returns(uint256 amount) {
+    function fssf() ownerOnly public {
+        address member;
+        uint256 appId;
+
+        (member, appId) = getApplication();
+
+        if(member != address(0) && appId != uint256(0)) {
+            scoring(member, parameters.averageScore, parameters.joinAmount);
+            // emit FSSF event
+            FSSF(member, appId);
+        }
+    }
+    /// get next application to process
+    function getApplication() view public returns (address member, uint256 appId) {
+        member = address(0);
+        appId = uint256(0);
+
+        if(appNumber == uint256(0)) {
+            return;
+        }
+
+        for(uint256 i = 1; i < applications.length; i++) {
+            if(!applications[i].processed) {
+                member = applications[i].member;
+                appId = i;
+                return;
+            }
+        }
+    }
+    /// get join amount for sender
+    function getJoinAmount() view public returns (uint256 amount) {
         amount = addressToAmount[msg.sender];
-        uint256 score = addressToScore[msg.sender];
-        // emit Apply event
-        Apply(msg.sender, score, amount);
+    }
+    /// get score
+    function getScore() view public returns (uint256 score) {
+        score = addressToScore[msg.sender];
+    }
+    /// get application ID
+    function getAppID() view public returns (uint256 appId) {
+        appId = addressToApplication[msg.sender];
+    }
+    /// apply function 
+    /// @return application ID must be not zero if application is accepted 
+    function apply() public returns(uint256 addId) {
+        addId = addressToApplication[msg.sender];
+
+        if (addId == uint256(0) && appNumber < parameters.maxApplications) {
+            // new application
+            Application memory app = Application({
+                timeStamp: now,
+                member: msg.sender,
+                tokensToBuy: uint8(1),
+                paymetMethod: uint8(0),
+                processed: false
+            });
+            
+            addId = applications.push(app) - 1;
+            if(addId == uint256(0)) {
+                // process the first one -- keep 0 index reserved
+                addId = applications.push(app) - 1;
+            }
+            require(addId == uint256(uint32(addId)));
+            addressToApplication[msg.sender] = addId;
+            appNumber++;
+
+            // emit Apply event
+            Apply(msg.sender, addId);
+        }
     }
     function _join(address _member, uint256 _score, uint256 _amount) internal returns(uint256) {
         uint256 id = _createNFT(_amount, "Crowdsurance", uint256(0), _member);
         // Create extension 
-        Crowdsurance memory _crowdsurance = Crowdsurance ({
+        extensions[id] = Crowdsurance ({
             timeStamp: now,
             activated: uint(0),
             duration: parameters.coverageDuration,
@@ -168,21 +264,20 @@ contract TokenCrowdsurance is TokenPool {
             claimNumber: uint8(0),
             status: uint8(Status.Init)
         });
-        // add extension
-        extensions[id] = _crowdsurance;
-        // now insert in the pool
-        insertPool(id);
+        // now insert in a subpool
+        _addTokenToSubPool(id);
         // emit event 
         Join(_member, id, _amount);
         // clear mapping
         delete addressToAmount[_member];
         delete addressToScore[_member];
+        
         // return NFT token ID
         return id;
     } 
     /// join function
     /// @return cowdsuranceId NFT token ID for created crowdsurance
-    function join() public payable returns(uint256 cowdsuranceId) {
+    function join() public payable returns(uint256 crowdsuranceId) {
         uint256 amount = msg.value;
         address member = msg.sender;
         uint256 score = addressToScore[member];
@@ -190,7 +285,7 @@ contract TokenCrowdsurance is TokenPool {
         require(score != uint256(0));
         require(amount == addressToAmount[member]);
         // call internal _join after all checkups 
-        cowdsuranceId = _join(member, score, amount);
+        crowdsuranceId = _join(member, score, amount);
     }
     /// activate function 
     /// @param _id NFT token ID to activate
@@ -198,6 +293,7 @@ contract TokenCrowdsurance is TokenPool {
         require(_id != uint256(0));
         require(_owns(msg.sender, _id));
         require(extensions[_id].amount != uint256(0));
+        require(extensions[_id].status != uint8(Status.Active));        // protect multiple activation that extend coverage
 
         nfts[_id].state = StateBlocked; // block transfer
         extensions[_id].status = uint8(Status.Active);
@@ -215,18 +311,21 @@ contract TokenCrowdsurance is TokenPool {
         require(_claim != uint256(0));
         require(extensions[_id].status == uint(Status.Active));
         require(extensions[_id].claimNumber < parameters.maxClaimNumber);
-        uint256 _payment = _claim * 100 / parameters.paymentRatio;
+        uint256 _payment = _claim * parameters.paymentRatio / 100;
         require((extensions[_id].paid + _payment) <= parameters.maxPaymentAmount);
         uint coverageEnd = extensions[_id].activated + extensions[_id].duration;
         require(coverageEnd >= now);
         // now ready to accept the claim request
-        Request memory _request;
-        _request.amount = _claim;
-        _request.timeStamp = now;
-        _request.duration = parameters.votingDuration;
-        _request.number = uint8(0);
         // change status
-        requests[_id] = _request;
+        requests[_id] = Request ({
+            amount: _claim,
+            timeStamp: now,
+            duration: parameters.votingDuration,
+            positive: uint8(0),
+            negative: uint8(0),
+            number: uint8(0),
+            members: [address(0), address(0), address(0), address(0), address(0)]
+        });
         extensions[_id].claimNumber++;
         extensions[_id].status = uint8(Status.Claim);
         // emit event
@@ -271,16 +370,37 @@ contract TokenCrowdsurance is TokenPool {
         // emit event
         Vote(msg.sender, _id, _positive);
     }
+    /// helpers voting 
+    function castPositive(uint256 _id) public {
+        vote(_id, true);
+    }
+    function castNegative(uint256 _id) public {
+        vote(_id, false);
+    }
     /// check claim voting status
     /// @param _id NFT token to check
-    function votingStatus(uint256 _id) public view returns (bool votingEnded, uint8 positive, uint8 negative) {
+    function votingStatus(uint256 _id) public view returns (VotingState state, uint8 positive, uint8 negative, uint256 payment, uint256 balance) {
         require(_id != uint256(0));
+        require(_owns(msg.sender, _id));
         require(extensions[_id].status == uint(Status.Claim));
+        
         Request storage _request = requests[_id];
-        uint votingEnd = _request.timeStamp + _request.duration;
-        votingEnded = votingEnd <= now;
+
         positive = _request.positive;
         negative = _request.negative;
+        state = VotingState.Progress;
+        payment = _request.amount * parameters.paymentRatio / 100;
+        balance = this.balance;
+        bool timeout = ( _request.timeStamp + _request.duration ) < now;
+        bool voted = ( _request.positive + _request.negative ) == parameters.juriesNumber;
+
+        if(timeout) {
+            state = VotingState.Timeout;
+        }
+        else if (voted) {
+            state = VotingState.Voted;
+        }
+        
     }
     /// get payment function
     /// @param _id NFT token to get payment
@@ -289,22 +409,29 @@ contract TokenCrowdsurance is TokenPool {
         require(_owns(msg.sender, _id));
         require(extensions[_id].status == uint(Status.Claim));
         Request storage _request = requests[_id];
-        uint votingEnd = _request.timeStamp + _request.duration;
-        require(votingEnd <= now);
-        if(_request.positive > _request.negative) {
+        bool timeout = ( _request.timeStamp + _request.duration ) < now;
+        bool voted = ( _request.positive + _request.negative ) == parameters.juriesNumber;
+        require(timeout || voted);
+        uint256 _payment = _request.amount * parameters.paymentRatio / 100;
+        uint256[4] memory distribution;
+        if((_request.positive > _request.negative) && _checkPayment(_id, _payment)) {
             // pay claims
-            uint256 _payment = _request.amount * 100 / parameters.paymentRatio;
             msg.sender.transfer(_payment);
             extensions[_id].status = uint8(Status.Approved);
             extensions[_id].paid = extensions[_id].paid + _payment;
+            // update pools' balances
+            distribution = _payValue(_id, _payment);
             // emit event
             Payment(msg.sender, _id, _payment, uint8(Status.Approved));
-        } else if   (_request.positive == _request.negative || 
-                    (_request.positive + _request.negative) < parameters.minJuriesNumber ) {
+        } else if   (((_request.positive == _request.negative) || 
+                    ((_request.positive + _request.negative) < parameters.minJuriesNumber))
+                    && _checkPayment(_id, extensions[_id].amount)) {
             // pay back join amount
             msg.sender.transfer(extensions[_id].amount);
             extensions[_id].status = uint8(Status.Closed);
             extensions[_id].paid = extensions[_id].paid + extensions[_id].amount;
+             // update pools' balances
+            distribution = _payValue(_id, extensions[_id].amount);
             // emit event
             Payment(msg.sender, _id, extensions[_id].amount, uint8(Status.Closed));
         } else {
@@ -318,6 +445,7 @@ contract TokenCrowdsurance is TokenPool {
             delete voters[_request.members[i]];
         }
         delete requests[_id];
+        delete distribution;
     }
     /// status count function
     /// @param _member address of token owner
@@ -335,13 +463,17 @@ contract TokenCrowdsurance is TokenPool {
     function TokenCrowdsurance(string _name, string _symbol) TokenPool(_name, _symbol) public {
         // setup default crowdsurance product parameters
         parameters.joinAmount = 0.1 ether;                  // default join amount
-        parameters.coverageDuration = uint(60*60*24*180);   // coverage duration in sec
+        parameters.coverageDuration = 0.5 years;            // coverage duration in sec
         parameters.maxClaimAmount = 10 ether;               // max claim amount
         parameters.maxClaimNumber = 1;                      // max claim number for the contract
         parameters.paymentRatio = 80;                       // claim to payment patio
         parameters.maxPaymentAmount = 10 ether;             // max payment amount for the contract
         parameters.minJuriesNumber = 3;                     // min juries number to count voting 
-        parameters.votingDuration = uint8(60*60*24*2);      // juries voting duration in sec
+        parameters.votingDuration = 2 days;                 // juries voting duration in sec
         parameters.juriesNumber = 5;                        // juries number -- not more than 5
+        parameters.maxApplications = 10;                    // max number of unprocessed applications
+        parameters.averageScore = 100;                      // average score value
+        appNumber = 0;                                      // initial value for applications 
     }
+    function() public payable { }                           //  fallback function to get Ether on contract account
 }

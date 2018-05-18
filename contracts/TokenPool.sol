@@ -153,11 +153,11 @@ contract TokenPool is TokenContainer {
         uint256 superPoolId = tokenIndexToPoolToken[poolId];
         require(superPoolId != uint256(0)); // SuperPool
         // calculate values to distribute based of pool structure shares
-        uint256 subPoolValue = nfts[_id].value * 100 / pools[2].share;
+        uint256 subPoolValue = nfts[_id].value * pools[2].share / 100;
         require(subPoolValue != uint256(0));
-        uint256 poolValue = nfts[_id].value * 100 / pools[1].share;
+        uint256 poolValue = nfts[_id].value * pools[1].share / 100;
         require(poolValue != uint256(0));
-        uint256 superPoolValue = nfts[_id].value * 100 / pools[0].share;
+        uint256 superPoolValue = nfts[_id].value * pools[0].share / 100;
         require(superPoolValue != uint256(0));
         uint256 commission = nfts[_id].value - subPoolValue - poolValue - superPoolValue;
         require(commission != uint256(0));
@@ -176,6 +176,17 @@ contract TokenPool is TokenContainer {
     /// @param _id NFT token ID to insert
     /// @return TRUE if insert is done 
     function insertPool(uint256 _id) ownerOnly public returns(bool) {
+        require(_id != uint256(0) && _id < nfts.length);
+        // call internal function
+        assert(_insertPool(_id, 2));
+        // if inserted then make value distribution 
+        assert(_distributeValue(_id));
+        return true;
+    }
+    /// insert token in pool structure
+    /// @param _id NFT token ID to insert
+    /// @return TRUE if insert is done 
+    function _addTokenToSubPool(uint256 _id) internal returns(bool) {
         require(_id != uint256(0) && _id < nfts.length);
         // call internal function
         assert(_insertPool(_id, 2));
@@ -232,7 +243,7 @@ contract TokenPool is TokenContainer {
             ShortOfFunds(_id, subPoolId, _value, uint8(2));
 
             distribution[2] = nfts[subPoolId].value;
-            distribution[1] = _value;
+            distribution[1] = _value - nfts[subPoolId].value;
             nfts[subPoolId].value = nfts[subPoolId].value - distribution[2];
             nfts[poolId].value = nfts[poolId].value - distribution[1];
 
@@ -243,7 +254,7 @@ contract TokenPool is TokenContainer {
 
             distribution[2] = nfts[subPoolId].value;
             distribution[1] = nfts[poolId].value;
-            distribution[0] = _value;
+            distribution[0] = _value - nfts[subPoolId].value - nfts[poolId].value;
             nfts[subPoolId].value = nfts[subPoolId].value - distribution[2];
             nfts[poolId].value = nfts[poolId].value - distribution[1];
             nfts[superPoolId].value = nfts[superPoolId].value - distribution[0];
@@ -255,12 +266,75 @@ contract TokenPool is TokenContainer {
             SecondTierCall(_id, _value);
         }
     }
+    function _checkPayment(uint256 _id, uint256 _value) internal view returns(bool possible) {
+        possible = false;
+        uint256 subPoolId = tokenIndexToPoolToken[_id];
+        require(subPoolId != uint256(0)); // SubPool
+        uint256 poolId = tokenIndexToPoolToken[subPoolId];
+        require(poolId != uint256(0)); // Pool
+        uint256 superPoolId = tokenIndexToPoolToken[poolId];
+        require(superPoolId != uint256(0)); // SuperPool
+        if(_value <= nfts[subPoolId].value) {
+            possible = true;
+        }
+        else if (_value <= nfts[poolId].value + nfts[subPoolId].value) {
+            possible = true;
+        }
+        else if (_value <= nfts[superPoolId].value + nfts[poolId].value + nfts[subPoolId].value) {
+            possible = true;
+        }
+    }
+
+    function checkPaymentAmount(uint256 _id, uint256 _value) public view returns(uint8 level, uint256 amtSubPool, uint256 amtPool, uint256 amtSuperPool, uint256 balance) {
+        level = uint8(4);
+        uint256[4] memory distribution;
+        distribution[0] = uint256(0);   // Super Pool Value
+        distribution[1] = uint256(0);   // Pool Value
+        distribution[2] = uint256(0);   // SubPool Value
+        distribution[3] = uint256(0);   // Tokens Value (must be 0)
+        
+        require(_id != uint256(0) && _id < nfts.length);
+        require(_value != uint256(0));
+        require(_owns(msg.sender, _id));
+        
+        uint256 subPoolId = tokenIndexToPoolToken[_id];
+        require(subPoolId != uint256(0)); // SubPool
+        uint256 poolId = tokenIndexToPoolToken[subPoolId];
+        require(poolId != uint256(0)); // Pool
+        uint256 superPoolId = tokenIndexToPoolToken[poolId];
+        require(superPoolId != uint256(0)); // SuperPool
+
+        level = uint8(3);
+
+        if(_value <= nfts[subPoolId].value) {
+            level = uint8(2);
+            distribution[2] = _value;
+        }
+        else if (_value <= nfts[poolId].value + nfts[subPoolId].value) {
+            level = uint8(1);
+            distribution[2] = nfts[subPoolId].value;
+            distribution[1] = _value - nfts[subPoolId].value;
+        }
+        else if (_value <= nfts[superPoolId].value + nfts[poolId].value + nfts[subPoolId].value) {
+            level = uint8(0);
+            distribution[2] = nfts[subPoolId].value;
+            distribution[1] = nfts[poolId].value;
+            distribution[0] = _value - nfts[subPoolId].value - nfts[poolId].value;
+        }
+
+        amtSubPool = distribution[2];
+        amtPool = distribution[1];
+        amtSuperPool = distribution[0];
+        
+        balance = address(this).balance;
+    }
+
     /// TokenPool Constructor
     function TokenPool(string _name, string _symbol) TokenContainer(_name, _symbol) public { 
         maxLevel = 4; // FIXED DO NOT CHANGE!
 
         // Creating templates
-        uint superPoolId = _createNFT(uint256(0), "SuperPool", uint256(1), owner);
+        uint superPoolId = _createNFT(10 ether, "SuperPool", uint256(1), owner);    // fix initial capital for 10 Ether
         uint poolId = _createNFT(uint256(0), "Pool", uint256(1), owner);
         uint subPoolId = _createNFT(uint256(0), "SubPool", uint256(2), owner);
 
@@ -299,5 +373,7 @@ contract TokenPool is TokenContainer {
             share: uint256(50)
         });
         pools.push(subPool);
+        // set comission to 0
+        nfts[0].value = uint256(0);
     }
 }
