@@ -239,7 +239,7 @@ approve NFT token value transfer
 |---|-----|----|--------|-----------|
 |0|_fromId|uint256||NFT token ID to transfer value|
 |1|_spender|address||token owner address|
-|2|_toId|uint256||NFT token ID to recieve value|
+|2|_toId|uint256||NFT token ID to receive value|
 |3|_value|uint256||value to approve for transfer|
 
 
@@ -504,8 +504,8 @@ ERC721SmartToken Transfer event
 |---|-----|----|--------|-----------|
 |0|from|address||NFT token owner address|
 |1|fromId|uint256||NFT token ID for transfer|
-|2|to|address||token owner to recieve the value|
-|3|toId|uint256||NFT token ID to recieve the value|
+|2|to|address||token owner to receive the value|
+|3|toId|uint256||NFT token ID to receive the value|
 |4|value|uint256||transfered value|
 
 
@@ -562,7 +562,7 @@ ERC20Controller CApprove event
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|spender|address||NFT token owner to recieve value|
+|0|spender|address||NFT token owner to receive value|
 |1|value|uint256||approved value|
 
 
@@ -577,8 +577,8 @@ ERC20Controller CTransferFrom event
 |---|-----|----|--------|-----------|
 |0|from|address||NFT token owner address|
 |1|fromId|uint256||NFT token ID to transfer value from|
-|2|to|address||NFT token owner address to recieve the value|
-|3|toId|uint256||NFT token ID to recieve the value|
+|2|to|address||NFT token owner address to receive the value|
+|3|toId|uint256||NFT token ID to receive the value|
 |4|value|uint256||transfered value|
 |5|allowance|uint256||remaining allowance amount|
 
@@ -593,7 +593,7 @@ ERC20Controller CIssue event
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
 |0|to|address||NFT token owner address|
-|1|toId|uint256||NFT token ID to recieve amount|
+|1|toId|uint256||NFT token ID to receive amount|
 |2|amount|uint256||issued amount|
 
 
@@ -633,8 +633,8 @@ ERC721SmartToken AddValue event
 
 |#  |Param|Type|TypeHint|Description|
 |---|-----|----|--------|-----------|
-|0|to|address||token owner to recieve the value|
-|1|toId|uint256||NFT token ID to recieve the value|
+|0|to|address||token owner to receive the value|
+|1|toId|uint256||NFT token ID to receive the value|
 |2|value|uint256||transfered value|
 
 
